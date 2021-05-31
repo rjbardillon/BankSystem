@@ -4,4 +4,4 @@ print("Group Members\n"
       "Rivera, Rhodemil Zeth M.")
 name = input("What is your name? ")
 print(f"Welcome {name}")
-print("ano ba Aaron")
+print("ano ba Aaron.")
