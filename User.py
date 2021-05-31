@@ -1,10 +1,20 @@
-from
-CONST_PIN = 1234
-CONST_BALANCE = 10000
+from BankingMethods import account_balance, deposit, withdraw, change_pin, pin_checker
+
+
+def user_options(choice):
+    if choice == "A":
+        account_balance()
+    elif choice == "B":
+        deposit()
+    elif choice == "C":
+        withdraw()
+    elif choice == "D":
+        change_pin()
+    elif choice == "E":
+        exit()
 
 
 def login():
-    pin = 0
     tries = 3
     while True:
         pin = int(input("Please input your pin "))
@@ -17,27 +27,10 @@ def login():
             return False
 
 
-def pin_checker(pin):
-    if CONST_PIN == pin:
-        return True
-    else:
-        return False
-
-
 def user_account():
     if login():
-        choice = input("A. Account Balance\nB. Deposit\nC. Withdraw\nD. Change Pin")
-        user_options(choice.upper())
+        while True:
+            choice = input("A. Account Balance\nB. Deposit\nC. Withdraw\nD. Change Pin\nE. Exit\t")
+            user_options(choice.upper())
     else:
         print("Your card is blocked. Please contact the bank for more information. ")
-
-
-def user_options(choice):
-    if choice == "A":
-        print("Account Balance")
-    if choice == "B":
-        print("Deposit")
-    if choice == "C":
-        print("Withdraw")
-    if choice == "D":
-        print("Change Pin")
