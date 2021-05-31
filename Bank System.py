@@ -5,4 +5,3 @@ print("Group Members\n"
 name = input("What is your name? ")
 print(f"Welcome {name}")
 print("labyu aaron")
-print("labyu aaron1")
