@@ -1,7 +1,18 @@
-print("Group Members\n"
-      "Bardillon, Romeo Jr. M.\n"
-      "Porlares, Aaron S.\n"
-      "Rivera, Rhodemil Zeth M.")
-name = input("What is your name? ")
-print(f"Welcome {name}")
-print("ano ba Aaron.")
+from User import user_account
+
+
+
+
+def show_screen():
+    choice = input("A. Admin\nB. User\t")
+    if choice.upper() == "A":
+        admin_account()
+    else:
+        user_account()
+
+
+def admin_account():
+    print("Admin Account")
+
+
+show_screen()
