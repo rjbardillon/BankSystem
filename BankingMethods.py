@@ -4,8 +4,8 @@ balance = 10000
 user_pin = 1234
 
 
-def format_float(balance):
-    return "₱{:,.2f}".format(balance)
+def format_float(float_balance):
+    return "₱{:,.2f}".format(float_balance)
 
 
 def account_balance():
@@ -19,7 +19,7 @@ def deposit():
     print(f"Your Balance is {balance}")
     money_deposited = float(input("How much money you want to deposit? "))
     balance += money_deposited
-    print(f"Your new balance is {format_float(balance)}")
+    print(f"You deposited {format_float(money_deposited)}.\nYour new balance is {format_float(balance)}")
     sleep(2)
     clear()
 
@@ -35,7 +35,7 @@ def withdraw():
                 sleep(2)
             else:
                 balance -= money_withdrawn
-                print(f"Your new balance is {format_float(balance)}")
+                print(f"You withdrawn {format_float(money_withdrawn)}.\nYour new balance is {format_float(balance)}")
                 sleep(2)
                 clear()
                 break
