@@ -17,7 +17,7 @@ def account_balance():
 
 def deposit():
     global balance
-    print(f"Your Balance is {balance}")
+    print(f"Your Balance is {format_float(balance)}")
     money_deposited = float_validator("How much money you want to deposit?\n")
     balance += money_deposited
     print(f"You deposited {format_float(money_deposited)}.\nYour new balance is {format_float(balance)}")
