@@ -1,7 +1,8 @@
 from time import sleep
 from ClearScreen import clear
+from Checker import float_validator, pin_validator
 balance = 10000
-user_pin = "1234"
+user_pin = 1234
 
 
 def format_float(float_balance):
@@ -17,7 +18,7 @@ def account_balance():
 def deposit():
     global balance
     print(f"Your Balance is {balance}")
-    money_deposited = float(input("How much money you want to deposit?\n"))
+    money_deposited = float_validator("How much money you want to deposit?\n")
     balance += money_deposited
     print(f"You deposited {format_float(money_deposited)}.\nYour new balance is {format_float(balance)}")
     sleep(2)
@@ -29,7 +30,7 @@ def withdraw():
     print(f"Your Balance is {format_float(balance)}")
     while balance > 0:
         while True:
-            money_withdrawn = float(input("How much money you want to withdraw?\n"))
+            money_withdrawn = float_validator("How much money you want to withdraw?\n")
             if money_withdrawn > balance:
                 print("You don't have enough balance.")
                 sleep(2)
@@ -45,8 +46,8 @@ def withdraw():
 def change_pin():
     global user_pin
     while True:
-        new_pin = int(input("Input your new pin: "))
-        confirm_pin = int(input("Confirm your new pin: "))
+        new_pin = pin_validator("Input your new pin: ")
+        confirm_pin = pin_validator("Confirm your new pin: ")
         if new_pin == confirm_pin:
             user_pin = new_pin
             print(f"Pin was changed. Your new pin is {user_pin}")
@@ -59,8 +60,6 @@ def change_pin():
 
 def pin_checker(pin):
     if user_pin == pin:
-       return True
+        return True
     else:
         return False
-
-

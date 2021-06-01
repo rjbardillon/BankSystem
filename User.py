@@ -1,6 +1,6 @@
 from BankingMethods import account_balance, deposit, withdraw, change_pin, pin_checker
 from Members import members
-from Checker import get_int
+from Checker import pin_validator
 
 
 def user_options(choice):
@@ -20,7 +20,7 @@ def user_options(choice):
 def login():
     tries = 3
     while True:
-        if pin_checker(get_int("Please input your pin\n")):
+        if pin_checker(pin_validator("Please input your pin\n")):
             return True
         else:
             tries = tries - 1
