@@ -1,4 +1,5 @@
 from BankingMethods import account_balance, deposit, withdraw, change_pin, pin_checker
+from Members import members
 
 
 def user_options(choice):
@@ -11,7 +12,7 @@ def user_options(choice):
     elif choice == "D":
         change_pin()
     elif choice == "E":
-        print("Thank You for Using our Bank System :)")
+        print(f"Thank You for Using our Bank System :)\n{members}")
         exit()
 
 
