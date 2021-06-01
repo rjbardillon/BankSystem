@@ -1,7 +1,7 @@
 from time import sleep
 from ClearScreen import clear
 balance = 10000
-user_pin = 1234
+user_pin = "1234"
 
 
 def format_float(float_balance):
@@ -59,6 +59,8 @@ def change_pin():
 
 def pin_checker(pin):
     if user_pin == pin:
-        return True
+       return True
     else:
         return False
+
+

@@ -19,7 +19,7 @@ def user_options(choice):
 def login():
     tries = 3
     while True:
-        pin = int(input("Please input your pin "))
+        pin = input("Please input your pin ")
         if pin_checker(pin):
             return True
         else:
