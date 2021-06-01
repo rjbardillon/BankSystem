@@ -11,6 +11,7 @@ def user_options(choice):
     elif choice == "D":
         change_pin()
     elif choice == "E":
+        print("Thank You for Using our Bank System :)")
         exit()
 
 
