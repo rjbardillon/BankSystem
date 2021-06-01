@@ -1,5 +1,6 @@
 from BankingMethods import account_balance, deposit, withdraw, change_pin, pin_checker
 from Members import members
+from Checker import get_int
 
 
 def user_options(choice):
@@ -19,8 +20,7 @@ def user_options(choice):
 def login():
     tries = 3
     while True:
-        pin = int(input("Please input your pin "))
-        if pin_checker(pin):
+        if pin_checker(get_int("Please input your pin\n")):
             return True
         else:
             tries = tries - 1
@@ -32,7 +32,7 @@ def login():
 def user_account():
     if login():
         while True:
-            choice = input("A. Account Balance\nB. Deposit\nC. Withdraw\nD. Change Pin\nE. Exit\t")
+            choice = input("A. Account Balance\nB. Deposit\nC. Withdraw\nD. Change Pin\nE. Exit\n")
             user_options(choice.upper())
     else:
         print("Your card is blocked. Please contact the bank for more information. ")

@@ -17,7 +17,7 @@ def account_balance():
 def deposit():
     global balance
     print(f"Your Balance is {balance}")
-    money_deposited = float(input("How much money you want to deposit? "))
+    money_deposited = float(input("How much money you want to deposit?\n"))
     balance += money_deposited
     print(f"You deposited {format_float(money_deposited)}.\nYour new balance is {format_float(balance)}")
     sleep(2)
@@ -29,7 +29,7 @@ def withdraw():
     print(f"Your Balance is {format_float(balance)}")
     while balance > 0:
         while True:
-            money_withdrawn = float(input("How much money you want to withdraw? "))
+            money_withdrawn = float(input("How much money you want to withdraw?\n"))
             if money_withdrawn > balance:
                 print("You don't have enough balance.")
                 sleep(2)
