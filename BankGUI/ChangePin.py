@@ -1,5 +1,6 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
-from PyQt5.QtGui import QIntValidator
+from PyQt5.QtCore import QRegExp
+from PyQt5.QtGui import QIntValidator, QRegExpValidator
 from PyQt5.QtWidgets import QMessageBox, QLineEdit, QPushButton
 from AccountCsv import get_account, write_account
 
@@ -42,8 +43,8 @@ class Ui_change_pin_window(object):
                                      "selection-background-color: rgb(85, 170, 255);")
         self.input_pin.setText("")
         self.input_pin.setObjectName("input_pin")
-        self.input_pin.setValidator(QIntValidator(1000, 9999))
         self.input_pin.setEchoMode(QLineEdit.Password)
+        self.input_pin.setValidator(QRegExpValidator(QRegExp("[1-9]{4,4}")))
         self.change_pin_label = QtWidgets.QLabel(self.centralwidget)
         self.change_pin_label.setGeometry(QtCore.QRect(330, 20, 141, 81))
         font = QtGui.QFont()
@@ -73,8 +74,8 @@ class Ui_change_pin_window(object):
                                        "selection-background-color: rgb(85, 170, 255);")
         self.confirm_pin.setText("")
         self.confirm_pin.setObjectName("confirm_pin")
-        self.confirm_pin.setValidator(QIntValidator(1000, 9999))
         self.confirm_pin.setEchoMode(QLineEdit.Password)
+        self.confirm_pin.setValidator(QRegExpValidator(QRegExp("[1-9]{4,4}")))
         self.change_pin_label_3 = QtWidgets.QLabel(self.centralwidget)
         self.change_pin_label_3.setGeometry(QtCore.QRect(30, 250, 201, 81))
         font = QtGui.QFont()
