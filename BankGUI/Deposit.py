@@ -84,19 +84,17 @@ class Ui_deposit_window(object):
         s_money_deposited = self.input_deposit.text()
         elements = get_account()
         balance = int(elements[0][2])
-        if len(self.input_deposit.text()) > 0:
+        if len(self.input_deposit.text()) == 0:
             self.error()
         else:
-            money_deposited = int(s_money_deposited.translate({ord('₱'): None}))
-        if money_deposited < 1:
-            self.error()
-        elif len(self.input_deposit.text()) > 0:
-            self.error()
-        else:
-            balance += money_deposited
-            elements[0][2] = balance
-            write_account(elements)
-            self.deposit_success()
+            money_deposited = int(s_money_deposited)
+            if money_deposited < 1:
+                self.error()
+            else:
+                balance += money_deposited
+                elements[0][2] = balance
+                write_account(elements)
+                self.deposit_success()
 
     def deposit_success(self):
         balance = get_account()[0][2]

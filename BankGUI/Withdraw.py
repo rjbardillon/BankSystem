@@ -82,19 +82,19 @@ class Ui_withdraw_window(object):
 
     def enter_pressed(self):
         s_money_withdraw = self.input_withdraw.text()
-        money_withdraw = int(s_money_withdraw.translate({ord('₱'): None}))
         elements = get_account()
         balance = int(elements[0][2])
-        if money_withdraw < 1:
+        if len(s_money_withdraw) == 0:
             self.error()
-        elif money_withdraw > balance:
-            self.not_enough_money_error()
         else:
-            balance -= money_withdraw
-            elements[0][2] = balance
-            write_account(elements)
-            self.withdraw_success()
-            self.main_menu()
+            money_deposited = int(s_money_withdraw)
+            if money_deposited < 1:
+                self.error()
+            else:
+                balance += money_deposited
+                elements[0][2] = balance
+                write_account(elements)
+                self.withdraw_success()
 
     def withdraw_success(self):
         balance = get_account()[0][2]
