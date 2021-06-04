@@ -2,7 +2,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtCore import QRegExp
 from PyQt5.QtGui import QIntValidator, QRegExpValidator
 from PyQt5.QtWidgets import QMessageBox, QPushButton, QLineEdit
-from AccountCsv import get_account, write_account
+from AccountCsv import get_account, edit_account
 
 
 class Ui_withdraw_window(object):
@@ -95,7 +95,7 @@ class Ui_withdraw_window(object):
             else:
                 balance -= money_withdraw
                 elements[0][2] = balance
-                write_account(elements)
+                edit_account(elements)
                 self.withdraw_success()
 
     def withdraw_success(self):

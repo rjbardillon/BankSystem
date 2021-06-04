@@ -136,12 +136,11 @@ class UiMainMenu(object):
         self.exit_button.setStyleSheet("color: rgb(255, 255, 255);\n"
                                       "background-color: rgb(170, 0, 0);")
         self.exit_button.setObjectName("pushButton")
-        self.exit_button.clicked.connect(lambda: main_menu.hide())
+        self.exit_button.clicked.connect(lambda: main_menu.close())
         main_menu.setCentralWidget(self.centralwidget)
         self.statusbar = QtWidgets.QStatusBar(main_menu)
         self.statusbar.setObjectName("statusbar")
         main_menu.setStatusBar(self.statusbar)
-
         self.retranslateUi(main_menu)
         QtCore.QMetaObject.connectSlotsByName(main_menu)
 

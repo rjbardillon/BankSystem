@@ -2,7 +2,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtCore import QRegExp
 from PyQt5.QtWidgets import QMessageBox, QPushButton, QLineEdit
 from PyQt5.QtGui import QIntValidator, QRegExpValidator
-from AccountCsv import get_account, write_account
+from AccountCsv import get_account, edit_account
 
 
 class Ui_deposit_window(object):
@@ -53,7 +53,7 @@ class Ui_deposit_window(object):
         self.enter_button.setStyleSheet("color: rgb(255, 255, 255);\n"
                                         "background-color: rgb(85, 170, 255);")
         self.enter_button.setObjectName("enter_button")
-        self.enter_button.clicked.connect(lambda: deposit_window.close())
+        self.enter_button.clicked.connect(lambda: deposit_window.hide())
         self.cancel_button = QPushButton(self.centralwidget, clicked=lambda: self.main_menu())
         self.cancel_button.setGeometry(QtCore.QRect(170, 260, 161, 61))
         font = QtGui.QFont()
@@ -93,7 +93,7 @@ class Ui_deposit_window(object):
             else:
                 balance += money_deposited
                 elements[0][2] = balance
-                write_account(elements)
+                edit_account(elements)
                 self.deposit_success()
 
     def deposit_success(self):

@@ -2,7 +2,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtCore import QRegExp
 from PyQt5.QtGui import QIntValidator, QRegExpValidator
 from PyQt5.QtWidgets import QMessageBox, QLineEdit, QPushButton
-from AccountCsv import get_account, write_account
+from AccountCsv import get_account, edit_account
 
 
 class Ui_change_pin_window(object):
@@ -64,7 +64,7 @@ class Ui_change_pin_window(object):
         self.confirm_button.setStyleSheet("background-color: rgb(85, 170, 255);\n"
                                           "color: rgb(255, 255, 255);")
         self.confirm_button.setObjectName("confirm_button")
-        self.confirm_button.clicked.connect(lambda: change_pin_window.close())
+        self.confirm_button.clicked.connect(lambda: change_pin_window.hide())
         self.confirm_pin = QtWidgets.QLineEdit(self.centralwidget)
         self.confirm_pin.setGeometry(QtCore.QRect(270, 250, 321, 81))
         font = QtGui.QFont()
@@ -75,7 +75,7 @@ class Ui_change_pin_window(object):
         self.confirm_pin.setText("")
         self.confirm_pin.setObjectName("confirm_pin")
         self.confirm_pin.setEchoMode(QLineEdit.Password)
-        self.confirm_pin.setValidator(QRegExpValidator(QRegExp("[1-9]{4}")))
+        self.confirm_pin.setValidator(QRegExpValidator(QRegExp("[0-9]{4}")))
         self.change_pin_label_3 = QtWidgets.QLabel(self.centralwidget)
         self.change_pin_label_3.setGeometry(QtCore.QRect(30, 250, 201, 81))
         font = QtGui.QFont()
@@ -118,18 +118,17 @@ class Ui_change_pin_window(object):
         confirm_pin = self.confirm_pin.text()
         if len(input_pin) != 4 and len(confirm_pin) != 4:
             self.error()
+            return False
         elif input_pin == get_account()[0][1]:
             self.same_pin_error()
-            self.main_menu()
             return False
         elif input_pin != confirm_pin:
             self.different_pin_error()
-            self.main_menu()
             return False
         else:
             elements = get_account()
             elements[0][1] = confirm_pin
-            write_account(elements)
+            edit_account(elements)
             self.change_pin_success()
             self.main_menu()
             return True
@@ -164,12 +163,12 @@ class Ui_change_pin_window(object):
         message.exec_()
         self.main_menu()
 
+
 if __name__ == "__main__":
     import sys
-
     app = QtWidgets.QApplication(sys.argv)
-    change_pin_window = QtWidgets.QMainWindow()
+    change_pin = QtWidgets.QMainWindow()
     ui = Ui_change_pin_window()
-    ui.setupUi(change_pin_window)
-    change_pin_window.show()
+    ui.setupUi(change_pin)
+    change_pin.show()
     sys.exit(app.exec_())
