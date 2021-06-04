@@ -91,7 +91,7 @@ class Ui_withdraw_window(object):
             if money_withdraw < 1:
                 self.error()
             elif money_withdraw > balance:
-                self.error()
+                self.not_enough_money_error()
             else:
                 balance -= money_withdraw
                 elements[0][2] = balance
@@ -105,6 +105,7 @@ class Ui_withdraw_window(object):
         message.setText(f"Your new balance is {balance}")
         message.setIcon(QMessageBox.Information)
         message.exec_()
+        self.main_menu()
 
     def not_enough_money_error(self):
         message = QMessageBox()
