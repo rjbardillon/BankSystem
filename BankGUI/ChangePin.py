@@ -1,6 +1,6 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtGui import QIntValidator
-from PyQt5.QtWidgets import QMessageBox, QLineEdit
+from PyQt5.QtWidgets import QMessageBox, QLineEdit, QPushButton
 from AccountCsv import get_account, write_account
 
 
@@ -42,6 +42,8 @@ class Ui_change_pin_window(object):
                                      "selection-background-color: rgb(85, 170, 255);")
         self.input_pin.setText("")
         self.input_pin.setObjectName("input_pin")
+        self.input_pin.setValidator(QIntValidator(1000, 9999))
+        self.input_pin.setEchoMode(QLineEdit.Password)
         self.change_pin_label = QtWidgets.QLabel(self.centralwidget)
         self.change_pin_label.setGeometry(QtCore.QRect(330, 20, 141, 81))
         font = QtGui.QFont()
@@ -51,15 +53,15 @@ class Ui_change_pin_window(object):
         self.change_pin_label.setFont(font)
         self.change_pin_label.setStyleSheet("color: rgb(255, 255, 255);")
         self.change_pin_label.setObjectName("change_pin_label")
-        self.confirm_button = QtWidgets.QPushButton(self.centralwidget, clicked=lambda: self.enter_pressed())
+        self.confirm_button = QPushButton(self.centralwidget, clicked=lambda: self.enter_pressed())
         self.confirm_button.setGeometry(QtCore.QRect(420, 380, 171, 71))
         font = QtGui.QFont()
         font.setPointSize(20)
         font.setBold(True)
         font.setWeight(75)
         self.confirm_button.setFont(font)
-        self.confirm_button.setStyleSheet("background-color: rgb(255, 255, 0);\n"
-                                          "color: rgb(0, 0, 0);")
+        self.confirm_button.setStyleSheet("background-color: rgb(85, 170, 255);\n"
+                                          "color: rgb(255, 255, 255);")
         self.confirm_button.setObjectName("confirm_button")
         self.confirm_button.clicked.connect(lambda: change_pin_window.close())
         self.confirm_pin = QtWidgets.QLineEdit(self.centralwidget)
@@ -71,6 +73,8 @@ class Ui_change_pin_window(object):
                                        "selection-background-color: rgb(85, 170, 255);")
         self.confirm_pin.setText("")
         self.confirm_pin.setObjectName("confirm_pin")
+        self.confirm_pin.setValidator(QIntValidator(1000, 9999))
+        self.confirm_pin.setEchoMode(QLineEdit.Password)
         self.change_pin_label_3 = QtWidgets.QLabel(self.centralwidget)
         self.change_pin_label_3.setGeometry(QtCore.QRect(30, 250, 201, 81))
         font = QtGui.QFont()
@@ -80,11 +84,18 @@ class Ui_change_pin_window(object):
         self.change_pin_label_3.setFont(font)
         self.change_pin_label_3.setStyleSheet("color: rgb(255, 255, 255);")
         self.change_pin_label_3.setObjectName("change_pin_label_3")
+        self.cancel_button = QPushButton(self.centralwidget, clicked=lambda: self.main_menu())
+        self.cancel_button.setGeometry(QtCore.QRect(80, 380, 171, 71))
+        font = QtGui.QFont()
+        font.setPointSize(20)
+        font.setBold(True)
+        font.setWeight(75)
+        self.cancel_button.setFont(font)
+        self.cancel_button.setStyleSheet("color: rgb(255, 255, 255);\n"
+                                         "background-color: rgb(170, 0, 0);")
+        self.cancel_button.setObjectName("cancel_button")
+        self.cancel_button.clicked.connect(lambda: change_pin_window.hide())
         change_pin_window.setCentralWidget(self.centralwidget)
-        self.input_pin.setValidator(QIntValidator(1000, 9999))
-        self.input_pin.setEchoMode(QLineEdit.Password)
-        self.confirm_pin.setValidator(QIntValidator(1000, 9999))
-        self.confirm_pin.setEchoMode(QLineEdit.Password)
         self.statusbar = QtWidgets.QStatusBar(change_pin_window)
         self.statusbar.setObjectName("statusbar")
         change_pin_window.setStatusBar(self.statusbar)
@@ -99,6 +110,7 @@ class Ui_change_pin_window(object):
         self.change_pin_label.setText(_translate("change_pin_window", "Change Pin"))
         self.confirm_button.setText(_translate("change_pin_window", "CONFIRM"))
         self.change_pin_label_3.setText(_translate("change_pin_window", "Confirm Pin"))
+        self.cancel_button.setText(_translate("change_pin_window", "CANCEL"))
 
     def enter_pressed(self):
         input_pin = self.input_pin.text()

@@ -1,5 +1,5 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
-from PyQt5.QtWidgets import QMessageBox
+from PyQt5.QtWidgets import QMessageBox, QPushButton
 from AccountCsv import get_account, write_account
 
 
@@ -40,8 +40,8 @@ class Ui_withdraw_window(object):
         self.input_withdraw.setStyleSheet("color: rgb(255, 255, 255);\n"
                                          "selection-background-color: rgb(85, 170, 255);")
         self.input_withdraw.setObjectName("input_deposit")
-        self.enter_button = QtWidgets.QPushButton(self.centralwidget, clicked=lambda: self.enter_pressed())
-        self.enter_button.setGeometry(QtCore.QRect(450, 250, 161, 61))
+        self.enter_button = QPushButton(self.centralwidget, clicked=lambda: self.enter_pressed())
+        self.enter_button.setGeometry(QtCore.QRect(530, 260, 161, 61))
         font = QtGui.QFont()
         font.setPointSize(16)
         font.setBold(True)
@@ -51,6 +51,17 @@ class Ui_withdraw_window(object):
                                         "background-color: rgb(85, 170, 255);")
         self.enter_button.setObjectName("enter_button")
         self.enter_button.clicked.connect(lambda: withdraw_window.close())
+        self.cancel_button = QPushButton(self.centralwidget, clicked=lambda: self.main_menu())
+        self.cancel_button.setGeometry(QtCore.QRect(200, 260, 161, 61))
+        font = QtGui.QFont()
+        font.setPointSize(16)
+        font.setBold(True)
+        font.setWeight(75)
+        self.cancel_button.setFont(font)
+        self.cancel_button.setStyleSheet("color: rgb(255, 255, 255);\n"
+                                         "background-color: rgb(170, 0, 0);")
+        self.cancel_button.setObjectName("cancel_button")
+        self.cancel_button.clicked.connect(lambda: withdraw_window.hide())
         withdraw_window.setCentralWidget(self.centralwidget)
         self.statusbar = QtWidgets.QStatusBar(withdraw_window)
         self.statusbar.setObjectName("statusbar")
@@ -65,6 +76,7 @@ class Ui_withdraw_window(object):
         self.withdraw_label.setText(_translate("withdraw_window", "Input amount to withdraw"))
         self.input_withdraw.setText(_translate("withdraw_window", "₱"))
         self.enter_button.setText(_translate("withdraw_window", "ENTER"))
+        self.cancel_button.setText(_translate("withdraw_window", "CANCEL"))
 
     def enter_pressed(self):
         s_money_withdraw = self.input_withdraw.text()
@@ -98,6 +110,7 @@ class Ui_withdraw_window(object):
 
 if __name__ == "__main__":
     import sys
+
     app = QtWidgets.QApplication(sys.argv)
     withdraw_window = QtWidgets.QMainWindow()
     ui = Ui_withdraw_window()

@@ -1,5 +1,4 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
-from PyQt5.QtGui import QIntValidator
 from PyQt5.QtWidgets import QMessageBox, QPushButton
 from AccountCsv import get_account, write_account
 
@@ -41,7 +40,6 @@ class Ui_deposit_window(object):
         self.input_deposit.setStyleSheet("color: rgb(255, 255, 255);\n"
                                          "selection-background-color: rgb(85, 170, 255);")
         self.input_deposit.setObjectName("input_deposit")
-        self.input_deposit.setValidator(QIntValidator(1, 2147483647))
         self.enter_button = QPushButton(self.centralwidget, clicked=lambda: self.enter_pressed())
         self.enter_button.setGeometry(QtCore.QRect(450, 250, 161, 61))
         font = QtGui.QFont()
@@ -53,6 +51,17 @@ class Ui_deposit_window(object):
                                         "background-color: rgb(85, 170, 255);")
         self.enter_button.setObjectName("enter_button")
         self.enter_button.clicked.connect(lambda: deposit_window.close())
+        self.cancel_button = QPushButton(self.centralwidget, clicked=lambda: self.main_menu())
+        self.cancel_button.setGeometry(QtCore.QRect(170, 260, 161, 61))
+        font = QtGui.QFont()
+        font.setPointSize(16)
+        font.setBold(True)
+        font.setWeight(75)
+        self.cancel_button.setFont(font)
+        self.cancel_button.setStyleSheet("color: rgb(255, 255, 255);\n"
+                                         "background-color: rgb(170, 0, 0);")
+        self.cancel_button.setObjectName("cancel_button")
+        self.cancel_button.clicked.connect(lambda: deposit_window.hide())
         deposit_window.setCentralWidget(self.centralwidget)
         self.statusbar = QtWidgets.QStatusBar(deposit_window)
         self.statusbar.setObjectName("statusbar")
@@ -67,6 +76,7 @@ class Ui_deposit_window(object):
         self.deposit_label.setText(_translate("deposit_window", "Input amount to deposit"))
         self.input_deposit.setText(_translate("deposit_window", "₱"))
         self.enter_button.setText(_translate("deposit_window", "ENTER"))
+        self.cancel_button.setText(_translate("deposit_window", "CANCEL"))
 
     def enter_pressed(self):
         s_money_deposited = self.input_deposit.text()
@@ -90,6 +100,7 @@ class Ui_deposit_window(object):
 
 if __name__ == "__main__":
     import sys
+
     app = QtWidgets.QApplication(sys.argv)
     deposit_window = QtWidgets.QMainWindow()
     ui = Ui_deposit_window()

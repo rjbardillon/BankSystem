@@ -118,8 +118,8 @@ selection-background-color: rgb(85, 170, 255);</string>
      </font>
     </property>
     <property name="styleSheet">
-     <string notr="true">background-color: rgb(255, 255, 0);
-color: rgb(0, 0, 0);</string>
+     <string notr="true">background-color: rgb(85, 170, 255);
+color: rgb(255, 255, 255);</string>
     </property>
     <property name="text">
      <string>CONFIRM</string>
@@ -168,6 +168,30 @@ selection-background-color: rgb(85, 170, 255);</string>
     </property>
     <property name="text">
      <string>Confirm Pin</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="confirm_button_2">
+    <property name="geometry">
+     <rect>
+      <x>80</x>
+      <y>380</y>
+      <width>171</width>
+      <height>71</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>20</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: rgb(255, 255, 255);
+background-color: rgb(170, 0, 0);</string>
+    </property>
+    <property name="text">
+     <string>CANCEL</string>
     </property>
    </widget>
   </widget>

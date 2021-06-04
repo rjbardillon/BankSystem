@@ -106,8 +106,7 @@ color: rgb(85, 170, 255);</string>
     </property>
     <property name="styleSheet">
      <string notr="true">color: rgb(255, 255, 255);
-color: rgb(0, 0, 0);
-background-color: rgb(255, 255, 0);</string>
+background-color: rgb(85, 170, 255);</string>
     </property>
     <property name="text">
      <string>WITHDRAW</string>
@@ -130,9 +129,8 @@ background-color: rgb(255, 255, 0);</string>
      </font>
     </property>
     <property name="styleSheet">
-     <string notr="true">color: rgb(255, 255, 255);
-color: rgb(0, 0, 0);
-background-color: rgb(255, 255, 0);</string>
+     <string notr="true">background-color: rgb(85, 170, 255);
+color: rgb(255, 255, 255);</string>
     </property>
     <property name="text">
      <string>DEPOSIT</string>
@@ -156,8 +154,7 @@ background-color: rgb(255, 255, 0);</string>
     </property>
     <property name="styleSheet">
      <string notr="true">color: rgb(255, 255, 255);
-color: rgb(0, 0, 0);
-background-color: rgb(255, 255, 0);</string>
+background-color: rgb(85, 170, 255);</string>
     </property>
     <property name="text">
      <string>CHANGE PIN</string>
@@ -181,8 +178,7 @@ background-color: rgb(255, 255, 0);</string>
     </property>
     <property name="styleSheet">
      <string notr="true">color: rgb(255, 255, 255);
-color: rgb(0, 0, 0);
-background-color: rgb(255, 255, 0);</string>
+background-color: rgb(85, 170, 255);</string>
     </property>
     <property name="text">
      <string>BALANCE INQUIRY</string>
@@ -202,6 +198,32 @@ background-color: rgb(255, 255, 0);</string>
     </property>
     <property name="pixmap">
      <pixmap>../images/Bank logo 1.png</pixmap>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pushButton">
+    <property name="geometry">
+     <rect>
+      <x>40</x>
+      <y>410</y>
+      <width>161</width>
+      <height>71</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>MS Shell Dlg 2</family>
+      <pointsize>22</pointsize>
+      <weight>75</weight>
+      <italic>false</italic>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: rgb(255, 255, 255);
+background-color: rgb(170, 0, 0);</string>
+    </property>
+    <property name="text">
+     <string>EXIT</string>
     </property>
    </widget>
   </widget>
