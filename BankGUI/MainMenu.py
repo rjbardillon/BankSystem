@@ -150,7 +150,8 @@ class UiMainMenu(object):
         main_menu.setWindowTitle(_translate("main_menu", "Main Menu"))
         self.atm_label.setText(_translate("main_menu", "ATM"))
         self.welcome_label.setText(_translate("main_menu", "Welcome"))
-        self.name_label.setText(_translate("main_menu", "ROMEO JR BARDILLON"))
+        user = get_account()[0][0]
+        self.name_label.setText(_translate("main_menu", user))
         self.withdraw_button.setText(_translate("main_menu", "WITHDRAW"))
         self.deposit_button.setText(_translate("main_menu", "DEPOSIT"))
         self.changepin_button.setText(_translate("main_menu", "CHANGE PIN"))
