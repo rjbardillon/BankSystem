@@ -44,7 +44,7 @@ class Ui_change_pin_window(object):
         self.input_pin.setText("")
         self.input_pin.setObjectName("input_pin")
         self.input_pin.setEchoMode(QLineEdit.Password)
-        self.input_pin.setValidator(QRegExpValidator(QRegExp("[1-9]{4,4}")))
+        self.input_pin.setValidator(QRegExpValidator(QRegExp("[1-9]{4}")))
         self.change_pin_label = QtWidgets.QLabel(self.centralwidget)
         self.change_pin_label.setGeometry(QtCore.QRect(330, 20, 141, 81))
         font = QtGui.QFont()
@@ -75,7 +75,7 @@ class Ui_change_pin_window(object):
         self.confirm_pin.setText("")
         self.confirm_pin.setObjectName("confirm_pin")
         self.confirm_pin.setEchoMode(QLineEdit.Password)
-        self.confirm_pin.setValidator(QRegExpValidator(QRegExp("[1-9]{4,4}")))
+        self.confirm_pin.setValidator(QRegExpValidator(QRegExp("[1-9]{4}")))
         self.change_pin_label_3 = QtWidgets.QLabel(self.centralwidget)
         self.change_pin_label_3.setGeometry(QtCore.QRect(30, 250, 201, 81))
         font = QtGui.QFont()
@@ -116,7 +116,9 @@ class Ui_change_pin_window(object):
     def enter_pressed(self):
         input_pin = self.input_pin.text()
         confirm_pin = self.confirm_pin.text()
-        if input_pin == get_account()[0][1]:
+        if len(input_pin) != 4 and len(confirm_pin) != 4:
+            self.error()
+        elif input_pin == get_account()[0][1]:
             self.same_pin_error()
             self.main_menu()
             return False
@@ -154,6 +156,13 @@ class Ui_change_pin_window(object):
         message.setIcon(QMessageBox.Warning)
         message.exec_()
 
+    def error(self):
+        message = QMessageBox()
+        message.setWindowTitle("Error")
+        message.setText("4 digit pin only! ")
+        message.setIcon(QMessageBox.Warning)
+        message.exec_()
+        self.main_menu()
 
 if __name__ == "__main__":
     import sys
