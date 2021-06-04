@@ -87,11 +87,13 @@ class Ui_withdraw_window(object):
         if len(s_money_withdraw) == 0:
             self.error()
         else:
-            money_deposited = int(s_money_withdraw)
-            if money_deposited < 1:
+            money_withdraw = int(s_money_withdraw)
+            if money_withdraw < 1:
+                self.error()
+            elif money_withdraw > balance:
                 self.error()
             else:
-                balance += money_deposited
+                balance -= money_withdraw
                 elements[0][2] = balance
                 write_account(elements)
                 self.withdraw_success()
