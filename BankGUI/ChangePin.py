@@ -118,12 +118,15 @@ class Ui_change_pin_window(object):
         confirm_pin = self.confirm_pin.text()
         if len(input_pin) != 4 and len(confirm_pin) != 4:
             self.error()
+            self.main_menu()
             return False
         elif input_pin == get_account()[0][1]:
             self.same_pin_error()
+            self.main_menu()
             return False
         elif input_pin != confirm_pin:
             self.different_pin_error()
+            self.main_menu()
             return False
         else:
             elements = get_account()
