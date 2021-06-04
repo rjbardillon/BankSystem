@@ -44,7 +44,7 @@ class Ui_change_pin_window(object):
         self.input_pin.setText("")
         self.input_pin.setObjectName("input_pin")
         self.input_pin.setEchoMode(QLineEdit.Password)
-        self.input_pin.setValidator(QRegExpValidator(QRegExp("[1-9]{4}")))
+        self.input_pin.setValidator(QRegExpValidator(QRegExp("[0-9]{4}")))
         self.change_pin_label = QtWidgets.QLabel(self.centralwidget)
         self.change_pin_label.setGeometry(QtCore.QRect(330, 20, 141, 81))
         font = QtGui.QFont()

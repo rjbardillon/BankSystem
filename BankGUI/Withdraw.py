@@ -1,5 +1,6 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
-from PyQt5.QtGui import QIntValidator
+from PyQt5.QtCore import QRegExp
+from PyQt5.QtGui import QIntValidator, QRegExpValidator
 from PyQt5.QtWidgets import QMessageBox, QPushButton, QLineEdit
 from AccountCsv import get_account, write_account
 
@@ -41,6 +42,7 @@ class Ui_withdraw_window(object):
         self.input_withdraw.setStyleSheet("color: rgb(255, 255, 255);\n"
                                          "selection-background-color: rgb(85, 170, 255);")
         self.input_withdraw.setObjectName("input_deposit")
+        self.input_withdraw.setValidator(QRegExpValidator(QRegExp("[0-9]{6}")))
         self.enter_button = QPushButton(self.centralwidget, clicked=lambda: self.enter_pressed())
         self.enter_button.setGeometry(QtCore.QRect(530, 260, 161, 61))
         font = QtGui.QFont()
@@ -75,7 +77,6 @@ class Ui_withdraw_window(object):
         _translate = QtCore.QCoreApplication.translate
         withdraw_window.setWindowTitle(_translate("withdraw_window", "Withdraw"))
         self.withdraw_label.setText(_translate("withdraw_window", "Input amount to withdraw"))
-        self.input_withdraw.setText(_translate("withdraw_window", "₱"))
         self.enter_button.setText(_translate("withdraw_window", "ENTER"))
         self.cancel_button.setText(_translate("withdraw_window", "CANCEL"))
 

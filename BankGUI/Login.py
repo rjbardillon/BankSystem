@@ -54,7 +54,6 @@ class UiLoginWindow(object):
         self.login_button.setFont(font)
         self.login_button.setStyleSheet("background-color: rgb(255, 255, 0);")
         self.login_button.setObjectName("login_button")
-        #self.login_button.clicked.connect(lambda: LoginWindow.hide())
         self.username_input = QtWidgets.QLineEdit(self.centralwidget)
         self.username_input.setGeometry(QtCore.QRect(150, 220, 113, 20))
         self.username_input.setStyleSheet("color: rgb(255, 255, 255);")

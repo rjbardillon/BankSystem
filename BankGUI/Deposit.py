@@ -1,5 +1,7 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
-from PyQt5.QtWidgets import QMessageBox, QPushButton
+from PyQt5.QtCore import QRegExp
+from PyQt5.QtWidgets import QMessageBox, QPushButton, QLineEdit
+from PyQt5.QtGui import QIntValidator, QRegExpValidator
 from AccountCsv import get_account, write_account
 
 
@@ -33,6 +35,7 @@ class Ui_deposit_window(object):
         self.logo_label.setPixmap(QtGui.QPixmap("../images/Bank logo 1.png"))
         self.logo_label.setObjectName("logo_label")
         self.input_deposit = QtWidgets.QLineEdit(self.centralwidget)
+        self.input_deposit.setValidator(QRegExpValidator(QRegExp("[0-9]{6}")))
         self.input_deposit.setGeometry(QtCore.QRect(370, 140, 321, 81))
         font = QtGui.QFont()
         font.setPointSize(20)
@@ -74,23 +77,26 @@ class Ui_deposit_window(object):
         _translate = QtCore.QCoreApplication.translate
         deposit_window.setWindowTitle(_translate("deposit_window", "Deposit"))
         self.deposit_label.setText(_translate("deposit_window", "Input amount to deposit"))
-        self.input_deposit.setText(_translate("deposit_window", "₱"))
         self.enter_button.setText(_translate("deposit_window", "ENTER"))
         self.cancel_button.setText(_translate("deposit_window", "CANCEL"))
 
     def enter_pressed(self):
         s_money_deposited = self.input_deposit.text()
-        money_deposited = int(s_money_deposited.translate({ord('₱'): None}))
         elements = get_account()
         balance = int(elements[0][2])
+        if len(self.input_deposit.text()) > 0:
+            self.error()
+        else:
+            money_deposited = int(s_money_deposited.translate({ord('₱'): None}))
         if money_deposited < 1:
+            self.error()
+        elif len(self.input_deposit.text()) > 0:
             self.error()
         else:
             balance += money_deposited
             elements[0][2] = balance
             write_account(elements)
             self.deposit_success()
-            self.main_menu()
 
     def deposit_success(self):
         balance = get_account()[0][2]
@@ -99,6 +105,7 @@ class Ui_deposit_window(object):
         message.setText(f"Your new balance is {balance}")
         message.setIcon(QMessageBox.Information)
         message.exec_()
+        self.main_menu()
 
     def error(self):
         message = QMessageBox()
