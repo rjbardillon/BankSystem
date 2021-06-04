@@ -18,7 +18,7 @@
 background-color: rgb(0, 0, 127);</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QLabel" name="label">
+   <widget class="QLabel" name="atm_label">
     <property name="geometry">
      <rect>
       <x>20</x>
@@ -41,7 +41,7 @@ background-color: rgb(0, 0, 127);</string>
      <string>ATM</string>
     </property>
    </widget>
-   <widget class="QLabel" name="label_2">
+   <widget class="QLabel" name="welcome_label">
     <property name="geometry">
      <rect>
       <x>20</x>
@@ -65,7 +65,7 @@ color: rgb(85, 170, 255);</string>
      <string>Welcome</string>
     </property>
    </widget>
-   <widget class="QLabel" name="label_3">
+   <widget class="QLabel" name="name_label">
     <property name="geometry">
      <rect>
       <x>20</x>
@@ -88,7 +88,7 @@ color: rgb(85, 170, 255);</string>
      <string>ROMEO JR BARDILLON</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton_2">
+   <widget class="QPushButton" name="withdraw_button">
     <property name="geometry">
      <rect>
       <x>530</x>
@@ -113,7 +113,7 @@ background-color: rgb(255, 255, 0);</string>
      <string>WITHDRAW</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton_3">
+   <widget class="QPushButton" name="deposit_button">
     <property name="geometry">
      <rect>
       <x>260</x>
@@ -138,7 +138,7 @@ background-color: rgb(255, 255, 0);</string>
      <string>DEPOSIT</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton_4">
+   <widget class="QPushButton" name="changepin_button">
     <property name="geometry">
      <rect>
       <x>530</x>
@@ -163,7 +163,7 @@ background-color: rgb(255, 255, 0);</string>
      <string>CHANGE PIN</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton_5">
+   <widget class="QPushButton" name="balinquiry_button">
     <property name="geometry">
      <rect>
       <x>260</x>
@@ -188,7 +188,7 @@ background-color: rgb(255, 255, 0);</string>
      <string>BALANCE INQUIRY</string>
     </property>
    </widget>
-   <widget class="QLabel" name="label_4">
+   <widget class="QLabel" name="logo_label">
     <property name="geometry">
      <rect>
       <x>680</x>

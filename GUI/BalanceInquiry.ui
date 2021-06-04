@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>withdraw_window</class>
- <widget class="QMainWindow" name="withdraw_window">
+ <class>balance_inquiry_window</class>
+ <widget class="QMainWindow" name="balance_inquiry_window">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -17,7 +17,7 @@
    <string notr="true">background-color: rgb(0, 0, 127);</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QLabel" name="label">
+   <widget class="QLabel" name="balance_label">
     <property name="geometry">
      <rect>
       <x>30</x>
@@ -40,7 +40,7 @@
      <string>Your Balance is</string>
     </property>
    </widget>
-   <widget class="QLabel" name="label_2">
+   <widget class="QLabel" name="log_label">
     <property name="geometry">
      <rect>
       <x>690</x>

@@ -17,7 +17,7 @@
    <string notr="true">background-color: rgb(0, 0, 127);</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QLabel" name="label">
+   <widget class="QLabel" name="deposit_label">
     <property name="geometry">
      <rect>
       <x>30</x>
@@ -40,7 +40,7 @@
      <string>Input amount to deposit</string>
     </property>
    </widget>
-   <widget class="QLabel" name="label_2">
+   <widget class="QLabel" name="logo_label">
     <property name="geometry">
      <rect>
       <x>690</x>
@@ -78,7 +78,7 @@ selection-background-color: rgb(85, 170, 255);</string>
      <string>₱</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton">
+   <widget class="QPushButton" name="enter_button">
     <property name="geometry">
      <rect>
       <x>450</x>
