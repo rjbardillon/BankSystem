@@ -54,7 +54,7 @@ class UiLoginWindow(object):
         self.login_button.setFont(font)
         self.login_button.setStyleSheet("background-color: rgb(255, 255, 0);")
         self.login_button.setObjectName("login_button")
-        self.login_button.clicked.connect(lambda: LoginWindow.hide())
+        #self.login_button.clicked.connect(lambda: LoginWindow.hide())
         self.username_input = QtWidgets.QLineEdit(self.centralwidget)
         self.username_input.setGeometry(QtCore.QRect(150, 220, 113, 20))
         self.username_input.setStyleSheet("color: rgb(255, 255, 255);")
@@ -96,6 +96,7 @@ class UiLoginWindow(object):
         username = elements[0][0]
         pin = elements[0][1]
         if username == username_entry and pin == pin_entry:
+            LoginWindow.hide()
             self.main_menu()
         else:
             self.login_error()

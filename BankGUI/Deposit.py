@@ -83,11 +83,14 @@ class Ui_deposit_window(object):
         money_deposited = int(s_money_deposited.translate({ord('₱'): None}))
         elements = get_account()
         balance = int(elements[0][2])
-        balance += money_deposited
-        elements[0][2] = balance
-        write_account(elements)
-        self.deposit_success()
-        self.main_menu()
+        if money_deposited < 1:
+            self.error()
+        else:
+            balance += money_deposited
+            elements[0][2] = balance
+            write_account(elements)
+            self.deposit_success()
+            self.main_menu()
 
     def deposit_success(self):
         balance = get_account()[0][2]
@@ -96,6 +99,14 @@ class Ui_deposit_window(object):
         message.setText(f"Your new balance is {balance}")
         message.setIcon(QMessageBox.Information)
         message.exec_()
+
+    def error(self):
+        message = QMessageBox()
+        message.setWindowTitle("Error")
+        message.setText("Your deposit should not be less than ₱1!")
+        message.setIcon(QMessageBox.Warning)
+        message.exec_()
+        self.main_menu()
 
 
 if __name__ == "__main__":
