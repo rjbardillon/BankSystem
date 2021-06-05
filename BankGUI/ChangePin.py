@@ -120,7 +120,7 @@ class Ui_change_pin_window(object):
             self.error()
             self.main_menu(user_index)
             return False
-        elif input_pin == get_account()[0][1]:
+        elif input_pin == get_account()[user_index][1]:
             self.same_pin_error()
             self.main_menu(user_index)
             return False
@@ -132,12 +132,12 @@ class Ui_change_pin_window(object):
             elements = get_account()
             elements[user_index][1] = confirm_pin
             edit_account(elements)
-            self.change_pin_success()
+            self.change_pin_success(user_index)
             self.main_menu(user_index)
             return True
 
-    def change_pin_success(self):
-        pin = get_account()[0][1]
+    def change_pin_success(self, user_index):
+        pin = get_account()[user_index][1]
         message = QMessageBox()
         message.setWindowTitle("Successful")
         message.setText(f"Your new pin is {pin}")

@@ -142,14 +142,18 @@ class UiAddAccountWindow(object):
         else:
             new_user.append(username_entry)
             pin_entry = self.pin_input.text()
-            new_user.append(pin_entry)
-            balance_entry = self.balance_input.text()
-            new_user.append(balance_entry)
-            existing_users = get_account()
-            existing_users.append(new_user)
-            edit_account(existing_users)
-            self.add_account_success()
-            self.main_menu()
+            if len(pin_entry) != 4:
+                self.error()
+                self.main_menu()
+            else:
+                new_user.append(pin_entry)
+                balance_entry = self.balance_input.text()
+                new_user.append(balance_entry)
+                existing_users = get_account()
+                existing_users.append(new_user)
+                edit_account(existing_users)
+                self.add_account_success()
+                self.main_menu()
 
     def add_account_success(self):
         message = QMessageBox()
