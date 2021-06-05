@@ -54,16 +54,19 @@ def account_index(username):
 def delete_account(username):
     if not os.path.exists('Accounts.txt'):
         create_file()
-    lines = list()
+    accounts = list()
     with open('Accounts.txt', 'r') as readFile:
         reader = csv.reader(readFile)
         for row in reader:
-            lines.append(row)
-            for field in row:
-                if field == username:
-                    lines.remove(row)
+            accounts.append(row)
+        i = 0
+        for account in accounts:
+            if account[0] == username:
+                accounts.pop(0)
+            else:
+                i += 1
     with open('Temp.txt', mode='w', newline='') as writeFile:
         writer = csv.writer(writeFile)
-        writer.writerows(lines)
+        writer.writerows(accounts)
     os.remove('Accounts.txt')
     os.rename('Temp.txt', 'Accounts.txt')
