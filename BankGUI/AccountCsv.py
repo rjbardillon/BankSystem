@@ -40,6 +40,16 @@ def account_exists(username):
         return False
 
 
+def account_index(username):
+    values = get_account()
+    i = 0
+    for value in values:
+        if value[0] == username:
+            return i
+        else:
+            i += 1
+
+
 def delete_account(username):
     if not os.path.exists('Accounts.txt'):
         create_file()

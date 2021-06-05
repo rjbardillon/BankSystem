@@ -1,16 +1,17 @@
+import os
 from PyQt5.QtGui import QIntValidator
-from AccountCsv import get_account
+from AccountCsv import get_account, account_index
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import QMessageBox, QLineEdit, QPushButton
 
 
 class UiLoginWindow(object):
 
-    def main_menu(self):
+    def main_menu(self, user_index):
         from MainMenu import UiMainMenu
         self.main_menu = QtWidgets.QMainWindow()
         self.ui = UiMainMenu()
-        self.ui.setupUi(self.main_menu)
+        self.ui.setupUi(self.main_menu, user_index)
         self.main_menu.show()
 
     def setupUi(self, MainWindow):
@@ -91,14 +92,18 @@ class UiLoginWindow(object):
     def login_pressed(self):
         username_entry = self.username_input.text()
         pin_entry = self.password_input.text()
-        elements = get_account()
-        username = elements[0][0]
-        pin = elements[0][1]
-        if username == username_entry and pin == pin_entry:
-            LoginWindow.hide()
-            self.main_menu()
+        user_index = account_index(username_entry)
+        if user_index == None:
+            self.no_user_existing_error()
         else:
-            self.login_error()
+            elements = get_account()
+            username = elements[user_index][0]
+            pin = elements[user_index][1]
+            if username == username_entry and pin == pin_entry:
+                LoginWindow.hide()
+                self.main_menu(user_index)
+            else:
+                self.login_error()
 
     def login_error(self):
         message = QMessageBox()
@@ -107,12 +112,31 @@ class UiLoginWindow(object):
         message.setIcon(QMessageBox.Warning)
         message.exec_()
 
+    def no_user_existing_error(self):
+        message = QMessageBox()
+        message.setWindowTitle("Wrong Pin")
+        message.setText("No existing user. ")
+        message.setIcon(QMessageBox.Warning)
+        message.exec_()
+
+
+def no_account_error():
+    message = QMessageBox()
+    message.setWindowTitle("Error")
+    message.setText("No Account as of the moment. Go to Admin to Add Account.")
+    message.setIcon(QMessageBox.Warning)
+    message.exec_()
+
 
 if __name__ == "__main__":
     import sys
+
     app = QtWidgets.QApplication(sys.argv)
     LoginWindow = QtWidgets.QMainWindow()
     ui = UiLoginWindow()
     ui.setupUi(LoginWindow)
     LoginWindow.show()
-    sys.exit(app.exec_())
+    if os.path.getsize('Accounts.txt') == 0:
+        no_account_error()
+    else:
+        sys.exit(app.exec_())

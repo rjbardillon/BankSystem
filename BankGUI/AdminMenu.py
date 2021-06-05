@@ -8,7 +8,7 @@ from DeleteAccount import UiDeleteAccountWindow
 class UIAdminMenu(object):
 
     def thank_you_window(self):
-        from ThankYou import UiThankYouMenu
+        from BankGUI.ThankYou import UiThankYouMenu
         self.thank_you_menu = QtWidgets.QMainWindow()
         self.ui = UiThankYouMenu()
         self.ui.setupUi(self.thank_you_menu)

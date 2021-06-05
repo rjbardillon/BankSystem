@@ -7,14 +7,14 @@ from AccountCsv import get_account, edit_account
 
 class Ui_change_pin_window(object):
 
-    def main_menu(self):
+    def main_menu(self, user_index):
         from MainMenu import UiMainMenu
         self.main_menu = QtWidgets.QMainWindow()
         self.ui = UiMainMenu()
-        self.ui.setupUi(self.main_menu)
+        self.ui.setupUi(self.main_menu, user_index)
         self.main_menu.show()
 
-    def setupUi(self, change_pin_window):
+    def setupUi(self, change_pin_window, user_index):
         change_pin_window.setObjectName("change_pin_window")
         change_pin_window.resize(800, 600)
         change_pin_window.setStyleSheet("background-color: rgb(0, 0, 127);")
@@ -54,7 +54,7 @@ class Ui_change_pin_window(object):
         self.change_pin_label.setFont(font)
         self.change_pin_label.setStyleSheet("color: rgb(255, 255, 255);")
         self.change_pin_label.setObjectName("change_pin_label")
-        self.confirm_button = QPushButton(self.centralwidget, clicked=lambda: self.enter_pressed())
+        self.confirm_button = QPushButton(self.centralwidget, clicked=lambda: self.enter_pressed(user_index))
         self.confirm_button.setGeometry(QtCore.QRect(420, 380, 171, 71))
         font = QtGui.QFont()
         font.setPointSize(20)
@@ -85,7 +85,7 @@ class Ui_change_pin_window(object):
         self.change_pin_label_3.setFont(font)
         self.change_pin_label_3.setStyleSheet("color: rgb(255, 255, 255);")
         self.change_pin_label_3.setObjectName("change_pin_label_3")
-        self.cancel_button = QPushButton(self.centralwidget, clicked=lambda: self.main_menu())
+        self.cancel_button = QPushButton(self.centralwidget, clicked=lambda: self.main_menu(user_index))
         self.cancel_button.setGeometry(QtCore.QRect(80, 380, 171, 71))
         font = QtGui.QFont()
         font.setPointSize(20)
@@ -113,27 +113,27 @@ class Ui_change_pin_window(object):
         self.change_pin_label_3.setText(_translate("change_pin_window", "Confirm Pin"))
         self.cancel_button.setText(_translate("change_pin_window", "CANCEL"))
 
-    def enter_pressed(self):
+    def enter_pressed(self, user_index):
         input_pin = self.input_pin.text()
         confirm_pin = self.confirm_pin.text()
         if len(input_pin) != 4 and len(confirm_pin) != 4:
             self.error()
-            self.main_menu()
+            self.main_menu(user_index)
             return False
         elif input_pin == get_account()[0][1]:
             self.same_pin_error()
-            self.main_menu()
+            self.main_menu(user_index)
             return False
         elif input_pin != confirm_pin:
             self.different_pin_error()
-            self.main_menu()
+            self.main_menu(user_index)
             return False
         else:
             elements = get_account()
-            elements[0][1] = confirm_pin
+            elements[user_index][1] = confirm_pin
             edit_account(elements)
             self.change_pin_success()
-            self.main_menu()
+            self.main_menu(user_index)
             return True
 
     def change_pin_success(self):
@@ -164,7 +164,6 @@ class Ui_change_pin_window(object):
         message.setText("4 digit pin only! ")
         message.setIcon(QMessageBox.Warning)
         message.exec_()
-        self.main_menu()
 
 
 if __name__ == "__main__":
@@ -172,6 +171,6 @@ if __name__ == "__main__":
     app = QtWidgets.QApplication(sys.argv)
     change_pin = QtWidgets.QMainWindow()
     ui = Ui_change_pin_window()
-    ui.setupUi(change_pin)
+    ui.setupUi(change_pin, 0)
     change_pin.show()
     sys.exit(app.exec_())

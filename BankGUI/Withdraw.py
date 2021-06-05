@@ -7,14 +7,14 @@ from AccountCsv import get_account, edit_account
 
 class Ui_withdraw_window(object):
 
-    def main_menu(self):
+    def main_menu(self, user_index):
         from MainMenu import UiMainMenu
         self.main_menu = QtWidgets.QMainWindow()
         self.ui = UiMainMenu()
-        self.ui.setupUi(self.main_menu)
+        self.ui.setupUi(self.main_menu, user_index)
         self.main_menu.show()
 
-    def setupUi(self, withdraw_window):
+    def setupUi(self, withdraw_window, user_index):
         withdraw_window.setObjectName("withdraw_window")
         withdraw_window.resize(800, 600)
         withdraw_window.setStyleSheet("background-color: rgb(0, 0, 127);")
@@ -43,7 +43,7 @@ class Ui_withdraw_window(object):
                                          "selection-background-color: rgb(85, 170, 255);")
         self.input_withdraw.setObjectName("input_deposit")
         self.input_withdraw.setValidator(QRegExpValidator(QRegExp("[0-9]{6}")))
-        self.enter_button = QPushButton(self.centralwidget, clicked=lambda: self.enter_pressed())
+        self.enter_button = QPushButton(self.centralwidget, clicked=lambda: self.enter_pressed(user_index))
         self.enter_button.setGeometry(QtCore.QRect(530, 260, 161, 61))
         font = QtGui.QFont()
         font.setPointSize(16)
@@ -54,7 +54,7 @@ class Ui_withdraw_window(object):
                                         "background-color: rgb(85, 170, 255);")
         self.enter_button.setObjectName("enter_button")
         self.enter_button.clicked.connect(lambda: withdraw_window.close())
-        self.cancel_button = QPushButton(self.centralwidget, clicked=lambda: self.main_menu())
+        self.cancel_button = QPushButton(self.centralwidget, clicked=lambda: self.main_menu(user_index))
         self.cancel_button.setGeometry(QtCore.QRect(200, 260, 161, 61))
         font = QtGui.QFont()
         font.setPointSize(16)
@@ -80,32 +80,35 @@ class Ui_withdraw_window(object):
         self.enter_button.setText(_translate("withdraw_window", "ENTER"))
         self.cancel_button.setText(_translate("withdraw_window", "CANCEL"))
 
-    def enter_pressed(self):
+    def enter_pressed(self, user_index):
         s_money_withdraw = self.input_withdraw.text()
         elements = get_account()
-        balance = int(elements[0][2])
+        balance = int(elements[user_index][2])
         if len(s_money_withdraw) == 0:
             self.error()
         else:
             money_withdraw = int(s_money_withdraw)
             if money_withdraw < 1:
                 self.error()
+                self.main_menu(user_index)
             elif money_withdraw > balance:
                 self.not_enough_money_error()
+                self.main_menu(user_index)
             else:
                 balance -= money_withdraw
-                elements[0][2] = balance
+                elements[user_index][2] = balance
                 edit_account(elements)
-                self.withdraw_success()
+                self.withdraw_success(user_index)
+                self.main_menu(user_index)
 
-    def withdraw_success(self):
-        balance = get_account()[0][2]
+    def withdraw_success(self, user_index):
+        balance = get_account()[user_index][2]
         message = QMessageBox()
         message.setWindowTitle("Successful")
         message.setText(f"Your new balance is {balance}")
         message.setIcon(QMessageBox.Information)
         message.exec_()
-        self.main_menu()
+
 
     def not_enough_money_error(self):
         message = QMessageBox()
@@ -113,7 +116,7 @@ class Ui_withdraw_window(object):
         message.setText("Not enough Balance! ")
         message.setIcon(QMessageBox.Warning)
         message.exec_()
-        self.main_menu()
+
 
     def error(self):
         message = QMessageBox()
@@ -121,7 +124,6 @@ class Ui_withdraw_window(object):
         message.setText("Your withdraw should not be less than ₱1! ")
         message.setIcon(QMessageBox.Warning)
         message.exec_()
-        self.main_menu()
 
 
 if __name__ == "__main__":
@@ -130,6 +132,6 @@ if __name__ == "__main__":
     app = QtWidgets.QApplication(sys.argv)
     withdraw_window = QtWidgets.QMainWindow()
     ui = Ui_withdraw_window()
-    ui.setupUi(withdraw_window)
+    ui.setupUi(withdraw_window, 0)
     withdraw_window.show()
     sys.exit(app.exec_())
