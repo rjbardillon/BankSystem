@@ -86,6 +86,7 @@ class Ui_withdraw_window(object):
         balance = int(elements[user_index][2])
         if len(s_money_withdraw) == 0:
             self.error()
+            self.main_menu(user_index)
         else:
             money_withdraw = int(s_money_withdraw)
             if money_withdraw < 1:

@@ -62,7 +62,7 @@ def delete_account(username):
         i = 0
         for account in accounts:
             if account[0] == username:
-                accounts.pop(0)
+                accounts.pop(i)
             else:
                 i += 1
     with open('Temp.txt', mode='w', newline='') as writeFile:

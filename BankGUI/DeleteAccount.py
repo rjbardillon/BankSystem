@@ -100,7 +100,7 @@ class UiDeleteAccountWindow(object):
         message = QMessageBox()
         message.setWindowTitle("Success")
         message.setText(f"User {self.username_input.text()} is deleted.")
-        message.setIcon(QMessageBox.Warning)
+        message.setIcon(QMessageBox.Information)
         message.exec_()
         self.main_menu()
 

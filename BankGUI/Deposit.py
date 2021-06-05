@@ -86,6 +86,7 @@ class Ui_deposit_window(object):
         balance = int(elements[user_index][2])
         if len(self.input_deposit.text()) == 0:
             self.error()
+            self.main_menu(user_index)
         else:
             money_deposited = int(s_money_deposited)
             if money_deposited < 1:

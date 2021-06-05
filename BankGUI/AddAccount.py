@@ -105,7 +105,7 @@ class UiAddAccountWindow(object):
         self.balance_input.setText("")
         self.balance_input.setObjectName("balance_input")
         self.balance_label = QtWidgets.QLabel(self.centralwidget)
-        self.balance_label.setGeometry(QtCore.QRect(30, 350, 201, 81))
+        self.balance_label.setGeometry(QtCore.QRect(10, 350, 251, 81))
         font = QtGui.QFont()
         font.setPointSize(18)
         font.setBold(True)
@@ -129,22 +129,23 @@ class UiAddAccountWindow(object):
         self.confirm_button.setText(_translate("add_account_window", "CONFIRM"))
         self.pin_label.setText(_translate("add_account_window", "Pin"))
         self.cancel_button.setText(_translate("add_account_window", "CANCEL"))
-        self.balance_label.setText(_translate("add_account_window", "Initial Balance"))
+        self.balance_label.setText(_translate("add_account_window", "Initial Balance\n(₱ 100 above)"))
 
     def enter_pressed_button(self):
         new_user = []
         username_entry = self.username_input.text()
+        balance_entry = int(self.balance_input.text())
         if account_exists(username_entry):
             self.duplicate_account_error()
             self.main_menu()
-        elif len(username_entry) == 0 or len(self.balance_input.text()) == 0 or len(self.pin_input.text()) == 0:
+        elif len(username_entry) == 0 or balance_entry < 100 or len(self.pin_input.text()) == 0:
             self.error()
+            self.main_menu()
         else:
             new_user.append(username_entry)
             pin_entry = self.pin_input.text()
             if len(pin_entry) != 4:
                 self.error()
-                self.main_menu()
             else:
                 new_user.append(pin_entry)
                 balance_entry = self.balance_input.text()
@@ -180,6 +181,14 @@ class UiAddAccountWindow(object):
         message = QMessageBox()
         message.setWindowTitle("Error")
         message.setText("Error!")
+        message.setIcon(QMessageBox.Warning)
+        message.exec_()
+        self.main_menu()
+
+    def balance_error(self):
+        message = QMessageBox()
+        message.setWindowTitle("Error")
+        message.setText("Initial Balance should not be less than 100!")
         message.setIcon(QMessageBox.Warning)
         message.exec_()
         self.main_menu()

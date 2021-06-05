@@ -219,9 +219,9 @@ selection-background-color: rgb(85, 170, 255);</string>
    <widget class="QLabel" name="balance_label">
     <property name="geometry">
      <rect>
-      <x>30</x>
+      <x>10</x>
       <y>350</y>
-      <width>201</width>
+      <width>251</width>
       <height>81</height>
      </rect>
     </property>
@@ -236,7 +236,8 @@ selection-background-color: rgb(85, 170, 255);</string>
      <string notr="true">color: rgb(255, 255, 255);</string>
     </property>
     <property name="text">
-     <string>Initial Balance</string>
+     <string>Initial Balance 
+(₱ 100 above)</string>
     </property>
    </widget>
   </widget>
