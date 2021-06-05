@@ -1,6 +1,6 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import QPushButton, QMessageBox
-from BankGUI.AccountCsv import account_exists, delete_account
+from AccountCsv import account_exists, delete_account
 
 
 class UiDeleteAccountWindow(object):

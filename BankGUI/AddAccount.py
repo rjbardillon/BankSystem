@@ -2,7 +2,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtCore import QRegExp
 from PyQt5.QtGui import QRegExpValidator
 from PyQt5.QtWidgets import QPushButton, QMessageBox, QLineEdit
-from BankGUI.AccountCsv import get_account, edit_account, account_exists
+from AccountCsv import get_account, edit_account, account_exists
 
 
 class UiAddAccountWindow(object):

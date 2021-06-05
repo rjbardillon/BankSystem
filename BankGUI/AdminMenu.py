@@ -3,6 +3,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import QPushButton, QMessageBox
 from AddAccount import UiAddAccountWindow
 from DeleteAccount import UiDeleteAccountWindow
+from AccountCsv import create_file
 
 
 class UIAdminMenu(object):
@@ -21,6 +22,7 @@ class UIAdminMenu(object):
         self.add_account_window.show()
 
     def delete_account(self):
+        create_file()
         if os.path.getsize('Accounts.txt') == 0:
             self.no_account_error()
             self.add_account()

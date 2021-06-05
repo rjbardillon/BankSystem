@@ -1,6 +1,6 @@
 import os
 from PyQt5.QtGui import QIntValidator
-from AccountCsv import get_account, account_index
+from AccountCsv import get_account, account_index, create_file
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import QMessageBox, QLineEdit, QPushButton
 
@@ -136,6 +136,7 @@ if __name__ == "__main__":
     ui = UiLoginWindow()
     ui.setupUi(LoginWindow)
     LoginWindow.show()
+    create_file()
     if os.path.getsize('Accounts.txt') == 0:
         no_account_error()
     else:

@@ -3,7 +3,8 @@ import os
 
 
 def create_file():
-    open('Accounts.txt', mode='a')
+    if not os.path.exists('Accounts.txt'):
+        open('Accounts.txt', mode='a')
 
 
 def get_account():
