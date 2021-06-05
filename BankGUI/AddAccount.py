@@ -138,8 +138,11 @@ class UiAddAccountWindow(object):
         if account_exists(username_entry):
             self.duplicate_account_error()
             self.main_menu()
-        elif len(username_entry) == 0 or balance_entry < 100 or len(self.pin_input.text()) == 0:
+        elif len(username_entry) == 0 or len(self.balance_input.text()) == 0 or len(self.pin_input.text()) == 0:
             self.error()
+            self.main_menu()
+        elif balance_entry < 100:
+            self.balance_error()
             self.main_menu()
         else:
             new_user.append(username_entry)
