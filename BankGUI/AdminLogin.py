@@ -44,7 +44,7 @@ class UiLoginWindow(object):
         self.password_label.setFont(font)
         self.password_label.setStyleSheet("color: rgb(255, 255, 255);")
         self.password_label.setObjectName("password_label")
-        self.login_button = QPushButton(self.centralwidget, clicked=lambda: self.login_pressed())
+        self.login_button = QPushButton(self.centralwidget, clicked=lambda: self.login_pressed(MainWindow))
         self.login_button.setGeometry(QtCore.QRect(190, 280, 75, 23))
         font = QtGui.QFont()
         font.setPointSize(10)
@@ -87,7 +87,7 @@ class UiLoginWindow(object):
         self.password_label.setText(_translate("MainWindow", "Password"))
         self.login_button.setText(_translate("MainWindow", "Login"))
 
-    def login_pressed(self):
+    def login_pressed(self, AdminLoginWindow):
         username_entry = self.username_input.text()
         pin_entry = self.password_input.text()
         if "admin" == username_entry and "1234" == pin_entry:

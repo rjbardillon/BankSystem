@@ -1,19 +1,32 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
-from PyQt5.QtWidgets import QMessageBox, QPushButton
-from AccountCsv import get_account, account_index
+from PyQt5.QtCore import QTimer, QRect, QDateTime
+from PyQt5.QtGui import QFont
+from PyQt5.QtWidgets import QMessageBox, QPushButton, QLabel
+from AccountCsv import get_account
 from ChangePin import Ui_change_pin_window
 from Deposit import Ui_deposit_window
 from Withdraw import Ui_withdraw_window
+from time import sleep
 
 
 class UiMainMenu(object):
 
-    def thank_you_window(self):
+    def thank_you_window(self, main_menu):
         from ThankYou import UiThankYouMenu
         self.thank_you_menu = QtWidgets.QMainWindow()
         self.ui = UiThankYouMenu()
         self.ui.setupUi(self.thank_you_menu)
         self.thank_you_menu.show()
+        QTimer.singleShot(5000, self.thank_you_menu.close)
+        self.log_in_window(main_menu)
+
+    def log_in_window(self, main_menu):
+        from Login import UiLoginWindow
+        self.LoginWindow = QtWidgets.QMainWindow()
+        self.ui = UiLoginWindow()
+        self.ui.setupUi(self.LoginWindow)
+        main_menu.hide()
+        self.LoginWindow.show()
 
     def deposit_window(self, user_index):
         self.deposit_window = QtWidgets.QMainWindow()
@@ -41,6 +54,10 @@ class UiMainMenu(object):
         self.ui.setupUi(self.change_pin_window, user_index)
         self.change_pin_window.show()
 
+    def showTime(self):
+        current_time = QDateTime.currentDateTime().toString('hh:mm:ss ap\ndddd yyyy MMMM dd')
+        self.clock_label.setText(current_time)
+
     def setupUi(self, main_menu, user_index):
         main_menu.setObjectName("main_menu")
         main_menu.resize(800, 600)
@@ -57,6 +74,18 @@ class UiMainMenu(object):
         self.atm_label.setFont(font)
         self.atm_label.setStyleSheet("color: rgb(255, 255, 255);")
         self.atm_label.setObjectName("atm_label")
+        timer = QTimer(self.centralwidget)
+        timer.timeout.connect(self.showTime)
+        timer.start(0)
+        font4 = QFont()
+        font4.setPointSize(18)
+        font4.setBold(True)
+        font4.setWeight(75)
+        self.clock_label = QLabel(self.centralwidget)
+        self.clock_label.setObjectName(u"clock_label")
+        self.clock_label.setGeometry(QRect(260, 30, 401, 61))
+        self.clock_label.setFont(font4)
+        self.clock_label.setStyleSheet(u"color: rgb(255, 255, 255);")
         self.welcome_label = QtWidgets.QLabel(self.centralwidget)
         self.welcome_label.setGeometry(QtCore.QRect(20, 140, 101, 31))
         font = QtGui.QFont()
@@ -125,7 +154,7 @@ class UiMainMenu(object):
         self.logo_label.setText("")
         self.logo_label.setPixmap(QtGui.QPixmap("../images/Bank logo 1.png"))
         self.logo_label.setObjectName("logo_label")
-        self.exit_button = QPushButton(self.centralwidget, clicked=lambda: self.thank_you_window())
+        self.exit_button = QPushButton(self.centralwidget, clicked=lambda:  self.thank_you_window(main_menu))
         self.exit_button.setGeometry(QtCore.QRect(40, 410, 161, 71))
         font = QtGui.QFont()
         font.setFamily("MS Shell Dlg 2")
@@ -137,7 +166,6 @@ class UiMainMenu(object):
         self.exit_button.setStyleSheet("color: rgb(255, 255, 255);\n"
                                       "background-color: rgb(170, 0, 0);")
         self.exit_button.setObjectName("pushButton")
-        self.exit_button.clicked.connect(lambda: main_menu.close())
         main_menu.setCentralWidget(self.centralwidget)
         self.statusbar = QtWidgets.QStatusBar(main_menu)
         self.statusbar.setObjectName("statusbar")
@@ -154,7 +182,7 @@ class UiMainMenu(object):
         self.deposit_button.setText(_translate("main_menu", "DEPOSIT"))
         self.changepin_button.setText(_translate("main_menu", "CHANGE PIN"))
         self.balinquiry_button.setText(_translate("main_menu", "BALANCE INQUIRY"))
-        self.exit_button.setText(_translate("main_menu", "EXIT"))
+        self.exit_button.setText(_translate("main_menu", "LOGOUT"))
 
 
 if __name__ == "__main__":

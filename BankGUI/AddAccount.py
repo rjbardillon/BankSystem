@@ -52,8 +52,7 @@ class UiAddAccountWindow(object):
         self.add_account_label.setFont(font)
         self.add_account_label.setStyleSheet("color: rgb(255, 255, 255);")
         self.add_account_label.setObjectName("add_account_label")
-        self.confirm_button = QPushButton(self.centralwidget, clicked=lambda: self.enter_pressed_button())
-        self.confirm_button.clicked.connect(lambda: add_account_window.hide())
+        self.confirm_button = QPushButton(self.centralwidget, clicked=lambda: self.enter_pressed_button(add_account_window))
         self.confirm_button.setGeometry(QtCore.QRect(410, 470, 171, 71))
         font = QtGui.QFont()
         font.setPointSize(20)
@@ -131,19 +130,15 @@ class UiAddAccountWindow(object):
         self.cancel_button.setText(_translate("add_account_window", "CANCEL"))
         self.balance_label.setText(_translate("add_account_window", "Initial Balance\n(₱ 100 above)"))
 
-    def enter_pressed_button(self):
+    def enter_pressed_button(self, add_account_window):
         new_user = []
         username_entry = self.username_input.text()
-        balance_entry = int(self.balance_input.text())
         if account_exists(username_entry):
             self.duplicate_account_error()
-            self.main_menu()
         elif len(username_entry) == 0 or len(self.balance_input.text()) == 0 or len(self.pin_input.text()) == 0:
             self.error()
-            self.main_menu()
-        elif balance_entry < 100:
+        elif int(self.balance_input.text()) < 100:
             self.balance_error()
-            self.main_menu()
         else:
             new_user.append(username_entry)
             pin_entry = self.pin_input.text()
@@ -157,6 +152,7 @@ class UiAddAccountWindow(object):
                 existing_users.append(new_user)
                 edit_account(existing_users)
                 self.add_account_success()
+                add_account_window.hide()
                 self.main_menu()
 
     def add_account_success(self):
@@ -186,7 +182,6 @@ class UiAddAccountWindow(object):
         message.setText("Error!")
         message.setIcon(QMessageBox.Warning)
         message.exec_()
-        self.main_menu()
 
     def balance_error(self):
         message = QMessageBox()
@@ -194,7 +189,6 @@ class UiAddAccountWindow(object):
         message.setText("Initial Balance should not be less than 100!")
         message.setIcon(QMessageBox.Warning)
         message.exec_()
-        self.main_menu()
 
 
 if __name__ == "__main__":

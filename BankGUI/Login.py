@@ -46,7 +46,7 @@ class UiLoginWindow(object):
         self.password_label.setFont(font)
         self.password_label.setStyleSheet("color: rgb(255, 255, 255);")
         self.password_label.setObjectName("password_label")
-        self.login_button = QPushButton(self.centralwidget, clicked=lambda: self.login_pressed())
+        self.login_button = QPushButton(self.centralwidget, clicked=lambda: self.login_pressed(MainWindow))
         self.login_button.setGeometry(QtCore.QRect(190, 280, 75, 23))
         font = QtGui.QFont()
         font.setPointSize(10)
@@ -89,7 +89,7 @@ class UiLoginWindow(object):
         self.password_label.setText(_translate("MainWindow", "Password"))
         self.login_button.setText(_translate("MainWindow", "Login"))
 
-    def login_pressed(self):
+    def login_pressed(self, LoginWindow):
         username_entry = self.username_input.text()
         pin_entry = self.password_input.text()
         user_index = account_index(username_entry)
@@ -102,19 +102,19 @@ class UiLoginWindow(object):
             if username == username_entry and pin == pin_entry:
                 LoginWindow.hide()
                 self.main_menu(user_index)
-            else:
-                self.login_error()
+            elif pin != pin_entry:
+                self.login_pin_error()
 
-    def login_error(self):
+    def login_pin_error(self):
         message = QMessageBox()
-        message.setWindowTitle("Wrong Pin")
-        message.setText("Try again. ")
+        message.setWindowTitle("Try again")
+        message.setText("Wrong Pin! ")
         message.setIcon(QMessageBox.Warning)
         message.exec_()
 
     def no_user_existing_error(self):
         message = QMessageBox()
-        message.setWindowTitle("Wrong Pin")
+        message.setWindowTitle("Error")
         message.setText("No existing user. ")
         message.setIcon(QMessageBox.Warning)
         message.exec_()

@@ -1,6 +1,8 @@
 import os
 from PyQt5 import QtCore, QtGui, QtWidgets
-from PyQt5.QtWidgets import QPushButton, QMessageBox
+from PyQt5.QtCore import QDateTime, QTimer, QRect
+from PyQt5.QtGui import QFont
+from PyQt5.QtWidgets import QPushButton, QMessageBox, QLabel
 from AddAccount import UiAddAccountWindow
 from DeleteAccount import UiDeleteAccountWindow
 from AccountCsv import create_file
@@ -8,12 +10,12 @@ from AccountCsv import create_file
 
 class UIAdminMenu(object):
 
-    def thank_you_window(self):
-        from BankGUI.ThankYou import UiThankYouMenu
-        self.thank_you_menu = QtWidgets.QMainWindow()
-        self.ui = UiThankYouMenu()
-        self.ui.setupUi(self.thank_you_menu)
-        self.thank_you_menu.show()
+    def log_in_window(self):
+        from AdminLogin import UiLoginWindow
+        self.AdminLoginWindow = QtWidgets.QMainWindow()
+        self.ui = UiLoginWindow()
+        self.ui.setupUi(self.AdminLoginWindow)
+        self.AdminLoginWindow.show()
 
     def add_account(self):
         self.add_account_window = QtWidgets.QMainWindow()
@@ -39,6 +41,10 @@ class UIAdminMenu(object):
         message.setIcon(QMessageBox.Warning)
         message.exec_()
 
+    def showTime(self):
+        current_time = QDateTime.currentDateTime().toString('hh:mm:ss ap\ndddd yyyy MMMM dd')
+        self.clock_label.setText(current_time)
+
     def setupUi(self, Admin_Menu):
         Admin_Menu.setObjectName("main_menu")
         Admin_Menu.resize(800, 600)
@@ -46,6 +52,18 @@ class UIAdminMenu(object):
                                 "background-color: rgb(0, 0, 127);")
         self.centralwidget = QtWidgets.QWidget(Admin_Menu)
         self.centralwidget.setObjectName("centralwidget")
+        timer = QTimer(self.centralwidget)
+        timer.timeout.connect(self.showTime)
+        timer.start(0)
+        font4 = QFont()
+        font4.setPointSize(18)
+        font4.setBold(True)
+        font4.setWeight(75)
+        self.clock_label = QLabel(self.centralwidget)
+        self.clock_label.setObjectName(u"clock_label")
+        self.clock_label.setGeometry(QRect(260, 30, 401, 61))
+        self.clock_label.setFont(font4)
+        self.clock_label.setStyleSheet(u"color: rgb(255, 255, 255);")
         self.atm_label = QtWidgets.QLabel(self.centralwidget)
         self.atm_label.setGeometry(QtCore.QRect(20, 30, 211, 71))
         font = QtGui.QFont()
@@ -101,7 +119,7 @@ class UIAdminMenu(object):
         self.logo_label.setText("")
         self.logo_label.setPixmap(QtGui.QPixmap("../images/Bank logo 1.png"))
         self.logo_label.setObjectName("logo_label")
-        self.exit_button = QPushButton(self.centralwidget, clicked=lambda: self.thank_you_window())
+        self.exit_button = QPushButton(self.centralwidget, clicked=lambda: self.log_in_window())
         self.exit_button.setGeometry(QtCore.QRect(40, 410, 161, 71))
         font = QtGui.QFont()
         font.setFamily("MS Shell Dlg 2")
@@ -113,7 +131,7 @@ class UIAdminMenu(object):
         self.exit_button.setStyleSheet("color: rgb(255, 255, 255);\n"
                                        "background-color: rgb(170, 0, 0);")
         self.exit_button.setObjectName("exit_button")
-        self.exit_button.clicked.connect(lambda: Admin_Menu.close())
+        self.exit_button.clicked.connect(lambda: Admin_Menu.hide())
         Admin_Menu.setCentralWidget(self.centralwidget)
         self.statusbar = QtWidgets.QStatusBar(Admin_Menu)
         self.statusbar.setObjectName("statusbar")

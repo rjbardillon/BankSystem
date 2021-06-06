@@ -41,8 +41,7 @@ class UiDeleteAccountWindow(object):
                                           "selection-background-color: rgb(85, 170, 255);")
         self.username_input.setText("")
         self.username_input.setObjectName("username_input")
-        self.enter_button = QPushButton(self.centralwidget, clicked=lambda: self.enter_pressed_button())
-        self.enter_button.clicked.connect(lambda: delete_account_window.hide())
+        self.enter_button = QPushButton(self.centralwidget, clicked=lambda: self.enter_pressed_button(delete_account_window))
         self.enter_button.setGeometry(QtCore.QRect(450, 250, 161, 61))
         font = QtGui.QFont()
         font.setPointSize(16)
@@ -88,12 +87,13 @@ class UiDeleteAccountWindow(object):
         self.cancel_button.setText(_translate("deposit_window", "CANCEL"))
         self.username_label_2.setText(_translate("deposit_window", "DELETE ACCOUNT"))
 
-    def enter_pressed_button(self):
+    def enter_pressed_button(self, delete_account_window):
         username = self.username_input.text()
         if not account_exists(username):
             self.error()
         else:
             delete_account(username)
+            delete_account_window.hide()
             self.account_deleted_successfully()
 
     def account_deleted_successfully(self):
@@ -110,7 +110,6 @@ class UiDeleteAccountWindow(object):
         message.setText("Username not existing!")
         message.setIcon(QMessageBox.Warning)
         message.exec_()
-        self.main_menu()
 
 
 if __name__ == "__main__":

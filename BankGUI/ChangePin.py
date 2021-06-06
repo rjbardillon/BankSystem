@@ -54,7 +54,7 @@ class Ui_change_pin_window(object):
         self.change_pin_label.setFont(font)
         self.change_pin_label.setStyleSheet("color: rgb(255, 255, 255);")
         self.change_pin_label.setObjectName("change_pin_label")
-        self.confirm_button = QPushButton(self.centralwidget, clicked=lambda: self.enter_pressed(user_index))
+        self.confirm_button = QPushButton(self.centralwidget, clicked=lambda: self.enter_pressed(user_index, change_pin_window))
         self.confirm_button.setGeometry(QtCore.QRect(420, 380, 171, 71))
         font = QtGui.QFont()
         font.setPointSize(20)
@@ -64,7 +64,6 @@ class Ui_change_pin_window(object):
         self.confirm_button.setStyleSheet("background-color: rgb(85, 170, 255);\n"
                                           "color: rgb(255, 255, 255);")
         self.confirm_button.setObjectName("confirm_button")
-        self.confirm_button.clicked.connect(lambda: change_pin_window.hide())
         self.confirm_pin = QtWidgets.QLineEdit(self.centralwidget)
         self.confirm_pin.setGeometry(QtCore.QRect(270, 250, 321, 81))
         font = QtGui.QFont()
@@ -113,26 +112,24 @@ class Ui_change_pin_window(object):
         self.change_pin_label_3.setText(_translate("change_pin_window", "Confirm Pin"))
         self.cancel_button.setText(_translate("change_pin_window", "CANCEL"))
 
-    def enter_pressed(self, user_index):
+    def enter_pressed(self, user_index, change_pin_window):
         input_pin = self.input_pin.text()
         confirm_pin = self.confirm_pin.text()
         if len(input_pin) != 4 and len(confirm_pin) != 4:
             self.error()
-            self.main_menu(user_index)
             return False
         elif input_pin == get_account()[user_index][1]:
             self.same_pin_error()
-            self.main_menu(user_index)
             return False
         elif input_pin != confirm_pin:
             self.different_pin_error()
-            self.main_menu(user_index)
             return False
         else:
             elements = get_account()
             elements[user_index][1] = confirm_pin
             edit_account(elements)
             self.change_pin_success(user_index)
+            change_pin_window.hide()
             self.main_menu(user_index)
             return True
 
