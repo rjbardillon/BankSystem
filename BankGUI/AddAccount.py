@@ -2,7 +2,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtCore import QRegExp
 from PyQt5.QtGui import QRegExpValidator
 from PyQt5.QtWidgets import QPushButton, QMessageBox, QLineEdit
-from AccountCsv import get_account, edit_account, account_exists
+from AccountCsv import get_account, edit_account, account_exists, update_history, admin_update_history
 
 
 class UiAddAccountWindow(object):
@@ -151,6 +151,8 @@ class UiAddAccountWindow(object):
                 existing_users = get_account()
                 existing_users.append(new_user)
                 edit_account(existing_users)
+                update_history(username_entry, "Create Account", self.balance_input.text())
+                admin_update_history(username_entry, "Add Account")
                 self.add_account_success()
                 add_account_window.hide()
                 self.main_menu()

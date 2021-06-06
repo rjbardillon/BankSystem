@@ -6,7 +6,6 @@ from AccountCsv import get_account
 from ChangePin import Ui_change_pin_window
 from Deposit import Ui_deposit_window
 from Withdraw import Ui_withdraw_window
-from time import sleep
 
 
 class UiMainMenu(object):
@@ -44,7 +43,7 @@ class UiMainMenu(object):
         balance = get_account()[user_index][2]
         message = QMessageBox()
         message.setWindowTitle("Balance Inquiry")
-        message.setText(f"Your balance is {balance}")
+        message.setText(f"Your balance is {'₱{:,.2f}'.format(int(balance))}")
         message.setIcon(QMessageBox.Information)
         message.exec_()
 
@@ -53,6 +52,13 @@ class UiMainMenu(object):
         self.ui = Ui_change_pin_window()
         self.ui.setupUi(self.change_pin_window, user_index)
         self.change_pin_window.show()
+
+    def user_transactions_window(self, user_index):
+        from UserViewTransactions import Ui_User_View_Transaction
+        self.User_View_Transaction = QtWidgets.QMainWindow()
+        self.ui = Ui_User_View_Transaction()
+        self.ui.setupUi(self.User_View_Transaction, user_index)
+        self.User_View_Transaction.show()
 
     def showTime(self):
         current_time = QDateTime.currentDateTime().toString('hh:mm:ss ap\ndddd yyyy MMMM dd')
@@ -170,6 +176,17 @@ class UiMainMenu(object):
         self.statusbar = QtWidgets.QStatusBar(main_menu)
         self.statusbar.setObjectName("statusbar")
         main_menu.setStatusBar(self.statusbar)
+        self.view_transactions_button = QPushButton(self.centralwidget, clicked=lambda: self.user_transactions_window(user_index))
+        self.view_transactions_button.clicked.connect(lambda: main_menu.hide())
+        self.view_transactions_button.setObjectName(u"view_transactions_button")
+        self.view_transactions_button.setGeometry(QRect(640, 150, 141, 21))
+        font6 = QFont()
+        font6.setPointSize(10)
+        font6.setBold(False)
+        font6.setWeight(50)
+        self.view_transactions_button.setFont(font6)
+        self.view_transactions_button.setStyleSheet(u"color: rgb(255, 255, 255);\n"
+                                                    "background-color: rgb(85, 170, 255);")
         self.retranslateUi(main_menu)
         QtCore.QMetaObject.connectSlotsByName(main_menu)
 
@@ -183,6 +200,7 @@ class UiMainMenu(object):
         self.changepin_button.setText(_translate("main_menu", "CHANGE PIN"))
         self.balinquiry_button.setText(_translate("main_menu", "BALANCE INQUIRY"))
         self.exit_button.setText(_translate("main_menu", "LOGOUT"))
+        self.view_transactions_button.setText(_translate("main_menu", "View Transactions"))
 
 
 if __name__ == "__main__":

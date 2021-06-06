@@ -41,6 +41,20 @@ class UIAdminMenu(object):
         message.setIcon(QMessageBox.Warning)
         message.exec_()
 
+    def admin_transactions_window(self):
+        from AdminViewTransactions import Ui_Admin_View_Transaction
+        self.Admin_View_Transaction = QtWidgets.QMainWindow()
+        self.ui = Ui_Admin_View_Transaction()
+        self.ui.setupUi(self.Admin_View_Transaction)
+        self.Admin_View_Transaction.show()
+
+    def view_accounts_window(self):
+        from AdminViewAccounts import Ui_Admin_View_Accounts
+        self.Admin_View_Transaction = QtWidgets.QMainWindow()
+        self.ui = Ui_Admin_View_Accounts()
+        self.ui.setupUi(self.Admin_View_Transaction)
+        self.Admin_View_Transaction.show()
+
     def showTime(self):
         current_time = QDateTime.currentDateTime().toString('hh:mm:ss ap\ndddd yyyy MMMM dd')
         self.clock_label.setText(current_time)
@@ -93,7 +107,7 @@ class UIAdminMenu(object):
         self.name_label.setStyleSheet("color: rgb(255, 255, 255);")
         self.name_label.setObjectName("name_label")
         self.delete_account_button = QPushButton(self.centralwidget, clicked=lambda: self.delete_account())
-        self.delete_account_button.setGeometry(QtCore.QRect(520, 270, 251, 81))
+        self.delete_account_button.setGeometry(QtCore.QRect(510, 210, 251, 81))
         font = QtGui.QFont()
         font.setPointSize(22)
         font.setBold(True)
@@ -104,7 +118,7 @@ class UIAdminMenu(object):
         self.delete_account_button.setObjectName("delete_account_button")
         self.delete_account_button.clicked.connect(lambda: Admin_Menu.hide())
         self.add_account_button = QPushButton(self.centralwidget, clicked=lambda: self.add_account())
-        self.add_account_button.setGeometry(QtCore.QRect(250, 270, 251, 81))
+        self.add_account_button.setGeometry(QtCore.QRect(240, 210, 251, 81))
         font = QtGui.QFont()
         font.setPointSize(22)
         font.setBold(True)
@@ -127,11 +141,29 @@ class UIAdminMenu(object):
         font.setBold(True)
         font.setItalic(False)
         font.setWeight(75)
+        font3 = QFont()
+        font3.setPointSize(22)
+        font3.setBold(True)
+        font3.setWeight(75)
         self.exit_button.setFont(font)
         self.exit_button.setStyleSheet("color: rgb(255, 255, 255);\n"
                                        "background-color: rgb(170, 0, 0);")
         self.exit_button.setObjectName("exit_button")
         self.exit_button.clicked.connect(lambda: Admin_Menu.hide())
+        self.view_transactions_button = QPushButton(self.centralwidget, clicked=lambda: self.admin_transactions_window())
+        self.view_transactions_button.clicked.connect(lambda: Admin_Menu.hide())
+        self.view_transactions_button.setObjectName(u"view_transactions_button")
+        self.view_transactions_button.setGeometry(QRect(510, 330, 251, 81))
+        self.view_transactions_button.setFont(font3)
+        self.view_transactions_button.setStyleSheet(u"color: rgb(255, 255, 255);\n"
+                                                    "background-color: rgb(85, 170, 255);")
+        self.view_account_button = QPushButton(self.centralwidget, clicked=lambda: self.view_accounts_window())
+        self.view_account_button.clicked.connect(lambda: Admin_Menu.hide())
+        self.view_account_button.setObjectName(u"view_account_button")
+        self.view_account_button.setGeometry(QRect(240, 330, 251, 81))
+        self.view_account_button.setFont(font3)
+        self.view_account_button.setStyleSheet(u"background-color: rgb(85, 170, 255);\n"
+                                               "color: rgb(255, 255, 255);")
         Admin_Menu.setCentralWidget(self.centralwidget)
         self.statusbar = QtWidgets.QStatusBar(Admin_Menu)
         self.statusbar.setObjectName("statusbar")
@@ -150,6 +182,8 @@ class UIAdminMenu(object):
                                                                    "ACCOUNT"))
         self.add_account_button.setText(_translate("main_menu", "ADD ACCOUNT"))
         self.exit_button.setText(_translate("main_menu", "EXIT"))
+        self.view_transactions_button.setText(_translate("main_menu", u"VIEW\nTRANSACTIONS", None))
+        self.view_account_button.setText(_translate("main_menu", u"VIEW\nACCOUNTS", None))
 
 
 if __name__ == "__main__":

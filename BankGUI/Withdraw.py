@@ -1,8 +1,8 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtCore import QRegExp
-from PyQt5.QtGui import QIntValidator, QRegExpValidator
-from PyQt5.QtWidgets import QMessageBox, QPushButton, QLineEdit
-from AccountCsv import get_account, edit_account
+from PyQt5.QtGui import QRegExpValidator
+from PyQt5.QtWidgets import QMessageBox, QPushButton
+from AccountCsv import get_account, edit_account, update_history
 
 
 class Ui_withdraw_window(object):
@@ -97,13 +97,14 @@ class Ui_withdraw_window(object):
                 edit_account(elements)
                 self.withdraw_success(user_index)
                 withdraw_window.hide()
+                update_history(elements[user_index][0], "Withdraw", s_money_withdraw)
                 self.main_menu(user_index)
 
     def withdraw_success(self, user_index):
         balance = get_account()[user_index][2]
         message = QMessageBox()
         message.setWindowTitle("Successful")
-        message.setText(f"Your new balance is {balance}")
+        message.setText(f"Your new balance is {'₱{:,.2f}'.format(int(balance))}")
         message.setIcon(QMessageBox.Information)
         message.exec_()
 

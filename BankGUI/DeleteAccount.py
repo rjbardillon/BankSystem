@@ -1,6 +1,6 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import QPushButton, QMessageBox
-from AccountCsv import account_exists, delete_account
+from AccountCsv import account_exists, delete_account, update_history, admin_update_history
 
 
 class UiDeleteAccountWindow(object):
@@ -93,8 +93,10 @@ class UiDeleteAccountWindow(object):
             self.error()
         else:
             delete_account(username)
-            delete_account_window.hide()
             self.account_deleted_successfully()
+            delete_account_window.hide()
+            update_history(username, "Delete Account", "0")
+            admin_update_history(username, "Delete Account")
 
     def account_deleted_successfully(self):
         message = QMessageBox()

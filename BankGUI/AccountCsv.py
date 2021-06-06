@@ -1,5 +1,8 @@
 import csv
 import os
+from PyQt5.QtCore import QDateTime
+
+today = QDateTime.currentDateTime().toString('yyyy-MM-dd hh:mm:ss ap')
 
 
 def create_file():
@@ -70,3 +73,59 @@ def delete_account(username):
         writer.writerows(accounts)
     os.remove('Accounts.txt')
     os.rename('Temp.txt', 'Accounts.txt')
+
+
+def update_history(username, transaction, balance):
+    if not os.path.exists(f"{username}.txt"):
+        open(f"{username}.txt", mode='a')
+    if transaction == "Create Account":
+        balance = "+" + balance
+    elif transaction == "Delete Account":
+        balance = "0"
+    elif transaction == "Deposit":
+        balance = "+" + balance
+    elif transaction == "Withdraw":
+        balance = "-" + balance
+    values = [[today, transaction, balance]]
+    with open(f"{username}.txt", mode='a', newline='') as writeFile:
+        writer = csv.writer(writeFile)
+        writer.writerows(values)
+
+
+def admin_update_history(username, transaction):
+    record = ""
+    if not os.path.exists("AdminHistory.txt"):
+        open("AdminHistory.txt", mode='a')
+    if transaction == "Add Account":
+        record = f"Added new account with the username '{username}'"
+    elif transaction == "Delete Account":
+        record = f"Deleted account with the username '{username}'"
+    values = [[today, record]]
+    with open("AdminHistory.txt", mode='a', newline='') as writeFile:
+        writer = csv.writer(writeFile)
+        writer.writerows(values)
+
+
+def get_admin_history(file):
+    values = []
+    if not os.path.exists(file):
+        open(file, mode='a')
+    with open(file) as csv_file:
+        csv_reader = csv.reader(csv_file, delimiter=',')
+        for row in csv_reader:
+            values.append(row)
+    csv_file.close()
+    return values
+
+
+def get_user_history(user_index):
+    values = []
+    file = f"{get_account()[user_index][0]}.txt"
+    if not os.path.exists(file):
+        open(file, mode='a')
+    with open(file) as csv_file:
+        csv_reader = csv.reader(csv_file, delimiter=',')
+        for row in csv_reader:
+            values.append(row)
+    csv_file.close()
+    return values

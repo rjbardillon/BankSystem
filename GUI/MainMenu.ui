@@ -226,6 +226,30 @@ background-color: rgb(170, 0, 0);</string>
      <string>EXIT</string>
     </property>
    </widget>
+   <widget class="QPushButton" name="view_transactions_button">
+    <property name="geometry">
+     <rect>
+      <x>640</x>
+      <y>150</y>
+      <width>141</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>10</pointsize>
+      <weight>50</weight>
+      <bold>false</bold>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: rgb(255, 255, 255);
+background-color: rgb(85, 170, 255);</string>
+    </property>
+    <property name="text">
+     <string>View Transactions</string>
+    </property>
+   </widget>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
  </widget>
