@@ -16,9 +16,9 @@ class UiMainMenu(object):
         self.thank_you_menu = QtWidgets.QMainWindow()
         self.ui = UiThankYouMenu()
         self.ui.setupUi(self.thank_you_menu)
+        self.log_in_window(main_menu)
         self.thank_you_menu.show()
         QTimer.singleShot(5000, self.thank_you_menu.close)
-        self.log_in_window(main_menu)
 
     def log_in_window(self, main_menu):
         from Login import UiLoginWindow

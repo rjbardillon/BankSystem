@@ -43,7 +43,7 @@ class Ui_deposit_window(object):
         self.input_deposit.setStyleSheet("color: rgb(255, 255, 255);\n"
                                          "selection-background-color: rgb(85, 170, 255);")
         self.input_deposit.setObjectName("input_deposit")
-        self.enter_button = QPushButton(self.centralwidget, clicked=lambda: self.enter_pressed(user_index))
+        self.enter_button = QPushButton(self.centralwidget, clicked=lambda: self.enter_pressed(user_index, deposit_window))
         self.enter_button.setGeometry(QtCore.QRect(450, 250, 161, 61))
         font = QtGui.QFont()
         font.setPointSize(16)
@@ -53,7 +53,6 @@ class Ui_deposit_window(object):
         self.enter_button.setStyleSheet("color: rgb(255, 255, 255);\n"
                                         "background-color: rgb(85, 170, 255);")
         self.enter_button.setObjectName("enter_button")
-        self.enter_button.clicked.connect(lambda: deposit_window.hide())
         self.cancel_button = QPushButton(self.centralwidget, clicked=lambda: self.main_menu(user_index))
         self.cancel_button.setGeometry(QtCore.QRect(170, 260, 161, 61))
         font = QtGui.QFont()
@@ -80,23 +79,22 @@ class Ui_deposit_window(object):
         self.enter_button.setText(_translate("deposit_window", "ENTER"))
         self.cancel_button.setText(_translate("deposit_window", "CANCEL"))
 
-    def enter_pressed(self, user_index):
+    def enter_pressed(self, user_index, deposit_window):
         s_money_deposited = self.input_deposit.text()
         elements = get_account()
         balance = int(elements[user_index][2])
         if len(self.input_deposit.text()) == 0:
             self.error()
-            self.main_menu(user_index)
         else:
             money_deposited = int(s_money_deposited)
             if money_deposited < 1:
                 self.error()
-                self.main_menu(user_index)
             else:
                 balance += money_deposited
                 elements[user_index][2] = balance
                 edit_account(elements)
                 self.deposit_success(user_index)
+                deposit_window.hide()
                 self.main_menu(user_index)
 
     def deposit_success(self, user_index):

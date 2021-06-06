@@ -43,7 +43,7 @@ class Ui_withdraw_window(object):
                                          "selection-background-color: rgb(85, 170, 255);")
         self.input_withdraw.setObjectName("input_deposit")
         self.input_withdraw.setValidator(QRegExpValidator(QRegExp("[0-9]{6}")))
-        self.enter_button = QPushButton(self.centralwidget, clicked=lambda: self.enter_pressed(user_index))
+        self.enter_button = QPushButton(self.centralwidget, clicked=lambda: self.enter_pressed(user_index, withdraw_window))
         self.enter_button.setGeometry(QtCore.QRect(530, 260, 161, 61))
         font = QtGui.QFont()
         font.setPointSize(16)
@@ -53,7 +53,6 @@ class Ui_withdraw_window(object):
         self.enter_button.setStyleSheet("color: rgb(255, 255, 255);\n"
                                         "background-color: rgb(85, 170, 255);")
         self.enter_button.setObjectName("enter_button")
-        self.enter_button.clicked.connect(lambda: withdraw_window.close())
         self.cancel_button = QPushButton(self.centralwidget, clicked=lambda: self.main_menu(user_index))
         self.cancel_button.setGeometry(QtCore.QRect(200, 260, 161, 61))
         font = QtGui.QFont()
@@ -80,26 +79,24 @@ class Ui_withdraw_window(object):
         self.enter_button.setText(_translate("withdraw_window", "ENTER"))
         self.cancel_button.setText(_translate("withdraw_window", "CANCEL"))
 
-    def enter_pressed(self, user_index):
+    def enter_pressed(self, user_index, withdraw_window):
         s_money_withdraw = self.input_withdraw.text()
         elements = get_account()
         balance = int(elements[user_index][2])
         if len(s_money_withdraw) == 0:
             self.error()
-            self.main_menu(user_index)
         else:
             money_withdraw = int(s_money_withdraw)
             if money_withdraw < 1:
                 self.error()
-                self.main_menu(user_index)
             elif money_withdraw > balance:
                 self.not_enough_money_error()
-                self.main_menu(user_index)
             else:
                 balance -= money_withdraw
                 elements[user_index][2] = balance
                 edit_account(elements)
                 self.withdraw_success(user_index)
+                withdraw_window.hide()
                 self.main_menu(user_index)
 
     def withdraw_success(self, user_index):
