@@ -57,6 +57,8 @@ class Ui_Admin_View_Accounts(object):
         self.clock_label.setStyleSheet(u"color: rgb(255, 255, 255);")
         self.tableWidget = QtWidgets.QTableWidget(self.centralwidget)
         self.tableWidget.setGeometry(QtCore.QRect(10, 130, 779, 441))
+        self.tableWidget.setDisabled(True)
+        self.tableWidget.setStyleSheet(u"color: rgb(0, 0, 0);")
         self.tableWidget.setObjectName("tableWidget")
         self.tableWidget.setColumnCount(3)
         self.tableWidget.setRowCount(0)

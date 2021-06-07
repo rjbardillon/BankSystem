@@ -22,7 +22,7 @@ class Ui_User_View_Transaction(object):
         User_View_Transaction.setObjectName("User_View_Transaction")
         User_View_Transaction.resize(800, 600)
         User_View_Transaction.setStyleSheet("background-color: rgb(85, 116, 255);\n"
-"background-color: rgb(0, 0, 127);")
+                                            "background-color: rgb(0, 0, 127);")
         self.centralwidget = QtWidgets.QWidget(User_View_Transaction)
         self.centralwidget.setObjectName("centralwidget")
         self.atm_label = QtWidgets.QLabel(self.centralwidget)
@@ -57,6 +57,8 @@ class Ui_User_View_Transaction(object):
         font5.setWeight(75)
         self.tableWidget = QtWidgets.QTableWidget(self.centralwidget)
         self.tableWidget.setGeometry(QtCore.QRect(10, 130, 779, 441))
+        self.tableWidget.setDisabled(True)
+        self.tableWidget.setStyleSheet(u"color: rgb(0, 0, 0);")
         self.tableWidget.setObjectName("tableWidget")
         self.tableWidget.setColumnCount(3)
         self.tableWidget.setRowCount(0)
@@ -83,7 +85,7 @@ class Ui_User_View_Transaction(object):
                 operation = "+"
             else:
                 operation = "-"
-            items[2] = f'{operation}'+'₱{:,.2f}'.format(int(items[2][1:]))
+            items[2] = f'{operation}' + '₱{:,.2f}'.format(int(items[2][1:]))
             for item in items:
                 self.tableWidget.setItem(row, column, QtWidgets.QTableWidgetItem(item))
                 self.tableWidget.setEditTriggers(QAbstractItemView.NoEditTriggers)
@@ -125,6 +127,7 @@ class Ui_User_View_Transaction(object):
 
 if __name__ == "__main__":
     import sys
+
     app = QtWidgets.QApplication(sys.argv)
     User_View_Transaction = QtWidgets.QMainWindow()
     ui = Ui_User_View_Transaction()
