@@ -25,7 +25,8 @@ class UIAdminMenu(object):
 
     def delete_account(self):
         create_file()
-        if os.path.getsize('Accounts.txt') == 0:
+        file = '../AdminHistoryFolder/' + 'Accounts.txt'
+        if os.path.getsize(file) == 0:
             self.no_account_error()
             self.add_account()
         else:
