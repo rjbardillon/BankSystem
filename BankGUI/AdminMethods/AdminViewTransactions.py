@@ -1,7 +1,7 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtCore import QRect, QSize, QDateTime, QTimer
 from PyQt5.QtGui import QIcon, QFont
-from PyQt5.QtWidgets import QCommandLinkButton, QLabel
+from PyQt5.QtWidgets import QCommandLinkButton, QLabel, QAbstractItemView
 from BankGUI.AccountCsv import get_admin_history
 
 
@@ -76,6 +76,7 @@ class Ui_Admin_View_Transaction(object):
             column = 0
             for item in items:
                 self.tableWidget.setItem(row, column, QtWidgets.QTableWidgetItem(item))
+                self.tableWidget.setEditTriggers(QAbstractItemView.NoEditTriggers)
                 column += 1
             row += 1
         self.commandLinkButton = QCommandLinkButton(self.centralwidget, clicked=lambda: self.main_menu())
