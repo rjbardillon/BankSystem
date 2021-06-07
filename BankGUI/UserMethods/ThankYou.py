@@ -30,7 +30,7 @@ class UiThankYouMenu(object):
         self.logo_label = QtWidgets.QLabel(self.centralwidget)
         self.logo_label.setGeometry(QtCore.QRect(680, 20, 91, 81))
         self.logo_label.setText("")
-        self.logo_label.setPixmap(QtGui.QPixmap("../images/Bank logo 1.png"))
+        self.logo_label.setPixmap(QtGui.QPixmap("../../images/Bank logo 1.png"))
         self.logo_label.setObjectName("logo_label")
         self.textBrowser = QtWidgets.QTextBrowser(self.centralwidget)
         self.textBrowser.setGeometry(QtCore.QRect(170, 250, 421, 181))

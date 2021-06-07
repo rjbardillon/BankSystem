@@ -2,8 +2,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtCore import QRect, QSize, QDateTime, QTimer
 from PyQt5.QtGui import QIcon, QFont
 from PyQt5.QtWidgets import QCommandLinkButton, QLabel
-
-from AccountCsv import get_admin_history
+from BankGUI.AccountCsv import get_admin_history
 
 
 class Ui_Admin_View_Accounts(object):
@@ -38,7 +37,7 @@ class Ui_Admin_View_Accounts(object):
         self.logo_label = QtWidgets.QLabel(self.centralwidget)
         self.logo_label.setGeometry(QtCore.QRect(680, 20, 91, 81))
         self.logo_label.setText("")
-        self.logo_label.setPixmap(QtGui.QPixmap("../images/Bank logo 1.png"))
+        self.logo_label.setPixmap(QtGui.QPixmap("../../images/Bank logo 1.png"))
         self.logo_label.setObjectName("logo_label")
         font5 = QFont()
         font5.setPointSize(13)
@@ -77,9 +76,10 @@ class Ui_Admin_View_Accounts(object):
         self.tableWidget.setFont(font5)
         self.tableWidget.setStyleSheet(u"color: rgb(255, 255, 255);")
         row = 0
-        for items in get_admin_history("Accounts.txt"):
-            self.tableWidget.setRowCount(len(get_admin_history("Accounts.txt")))
+        for items in get_admin_history('Accounts.txt'):
+            self.tableWidget.setRowCount(len(get_admin_history('Accounts.txt')))
             column = 0
+            items[2] = "₱{:,.2f}".format(int(items[2]))
             for item in items:
                 self.tableWidget.setItem(row, column, QtWidgets.QTableWidgetItem(item))
                 column += 1
@@ -93,7 +93,7 @@ class Ui_Admin_View_Accounts(object):
         self.commandLinkButton.setObjectName(u"commandLinkButton")
         self.commandLinkButton.setGeometry(QRect(0, 0, 41, 41))
         icon = QIcon()
-        icon.addFile(u"../images/back_button_icon.png", QSize(), QIcon.Normal, QIcon.Off)
+        icon.addFile(u"../../images/back_button_icon.png", QSize(), QIcon.Normal, QIcon.Off)
         self.commandLinkButton.setIcon(icon)
 
         self.retranslateUi(Admin_View_Transaction)

@@ -2,7 +2,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtCore import QTimer, QRect, QDateTime
 from PyQt5.QtGui import QFont
 from PyQt5.QtWidgets import QMessageBox, QPushButton, QLabel
-from AccountCsv import get_account
+from BankGUI.AccountCsv import get_account
 from ChangePin import Ui_change_pin_window
 from Deposit import Ui_deposit_window
 from Withdraw import Ui_withdraw_window
@@ -158,7 +158,7 @@ class UiMainMenu(object):
         self.logo_label = QtWidgets.QLabel(self.centralwidget)
         self.logo_label.setGeometry(QtCore.QRect(680, 20, 91, 81))
         self.logo_label.setText("")
-        self.logo_label.setPixmap(QtGui.QPixmap("../images/Bank logo 1.png"))
+        self.logo_label.setPixmap(QtGui.QPixmap("../../images/Bank logo 1.png"))
         self.logo_label.setObjectName("logo_label")
         self.exit_button = QPushButton(self.centralwidget, clicked=lambda:  self.thank_you_window(main_menu))
         self.exit_button.setGeometry(QtCore.QRect(40, 410, 161, 71))

@@ -1,6 +1,6 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import QPushButton, QMessageBox
-from AccountCsv import account_exists, delete_account, update_history, admin_update_history
+from BankGUI.AccountCsv import account_exists, delete_account, update_history, admin_update_history
 
 
 class UiDeleteAccountWindow(object):
@@ -30,7 +30,7 @@ class UiDeleteAccountWindow(object):
         self.logo_label = QtWidgets.QLabel(self.centralwidget)
         self.logo_label.setGeometry(QtCore.QRect(690, 10, 101, 91))
         self.logo_label.setText("")
-        self.logo_label.setPixmap(QtGui.QPixmap("../images/Bank logo 1.png"))
+        self.logo_label.setPixmap(QtGui.QPixmap("../../images/Bank logo 1.png"))
         self.logo_label.setObjectName("logo_label")
         self.username_input = QtWidgets.QLineEdit(self.centralwidget)
         self.username_input.setGeometry(QtCore.QRect(370, 140, 321, 81))

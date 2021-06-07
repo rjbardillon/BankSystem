@@ -5,7 +5,7 @@ from PyQt5.QtGui import QFont
 from PyQt5.QtWidgets import QPushButton, QMessageBox, QLabel
 from AddAccount import UiAddAccountWindow
 from DeleteAccount import UiDeleteAccountWindow
-from AccountCsv import create_file
+from BankGUI.AccountCsv import create_file
 
 
 class UIAdminMenu(object):
@@ -131,7 +131,7 @@ class UIAdminMenu(object):
         self.logo_label = QtWidgets.QLabel(self.centralwidget)
         self.logo_label.setGeometry(QtCore.QRect(680, 20, 91, 81))
         self.logo_label.setText("")
-        self.logo_label.setPixmap(QtGui.QPixmap("../images/Bank logo 1.png"))
+        self.logo_label.setPixmap(QtGui.QPixmap("../../images/Bank logo 1.png"))
         self.logo_label.setObjectName("logo_label")
         self.exit_button = QPushButton(self.centralwidget, clicked=lambda: self.log_in_window())
         self.exit_button.setGeometry(QtCore.QRect(40, 410, 161, 71))

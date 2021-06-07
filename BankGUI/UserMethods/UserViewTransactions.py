@@ -2,29 +2,28 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtCore import QRect, QSize, QDateTime, QTimer
 from PyQt5.QtGui import QIcon, QFont
 from PyQt5.QtWidgets import QCommandLinkButton, QLabel
+from BankGUI.AccountCsv import get_user_history
 
-from AccountCsv import get_admin_history
 
+class Ui_User_View_Transaction(object):
 
-class Ui_Admin_View_Transaction(object):
-
-    def main_menu(self):
-        from AdminMenu import UIAdminMenu
-        self.admin_menu = QtWidgets.QMainWindow()
-        self.ui = UIAdminMenu()
-        self.ui.setupUi(self.admin_menu)
-        self.admin_menu.show()
+    def main_menu(self, user_index):
+        from MainMenu import UiMainMenu
+        self.main_menu = QtWidgets.QMainWindow()
+        self.ui = UiMainMenu()
+        self.ui.setupUi(self.main_menu, user_index)
+        self.main_menu.show()
 
     def showTime(self):
         current_time = QDateTime.currentDateTime().toString('hh:mm:ss ap\ndddd yyyy MMMM dd')
         self.clock_label.setText(current_time)
 
-    def setupUi(self, Admin_View_Transaction):
-        Admin_View_Transaction.setObjectName("Admin_View_Transaction")
-        Admin_View_Transaction.resize(800, 600)
-        Admin_View_Transaction.setStyleSheet("background-color: rgb(85, 116, 255);\n"
-                                             "background-color: rgb(0, 0, 127);")
-        self.centralwidget = QtWidgets.QWidget(Admin_View_Transaction)
+    def setupUi(self, User_View_Transaction, user_index):
+        User_View_Transaction.setObjectName("User_View_Transaction")
+        User_View_Transaction.resize(800, 600)
+        User_View_Transaction.setStyleSheet("background-color: rgb(85, 116, 255);\n"
+"background-color: rgb(0, 0, 127);")
+        self.centralwidget = QtWidgets.QWidget(User_View_Transaction)
         self.centralwidget.setObjectName("centralwidget")
         self.atm_label = QtWidgets.QLabel(self.centralwidget)
         self.atm_label.setGeometry(QtCore.QRect(20, 30, 211, 71))
@@ -35,15 +34,6 @@ class Ui_Admin_View_Transaction(object):
         self.atm_label.setFont(font)
         self.atm_label.setStyleSheet("color: rgb(255, 255, 255);")
         self.atm_label.setObjectName("atm_label")
-        self.logo_label = QtWidgets.QLabel(self.centralwidget)
-        self.logo_label.setGeometry(QtCore.QRect(680, 20, 91, 81))
-        self.logo_label.setText("")
-        self.logo_label.setPixmap(QtGui.QPixmap("../images/Bank logo 1.png"))
-        self.logo_label.setObjectName("logo_label")
-        font5 = QFont()
-        font5.setPointSize(13)
-        font5.setBold(False)
-        font5.setWeight(75)
         timer = QTimer(self.centralwidget)
         timer.timeout.connect(self.showTime)
         timer.start(0)
@@ -56,10 +46,19 @@ class Ui_Admin_View_Transaction(object):
         self.clock_label.setGeometry(QRect(260, 30, 401, 61))
         self.clock_label.setFont(font4)
         self.clock_label.setStyleSheet(u"color: rgb(255, 255, 255);")
+        self.logo_label = QtWidgets.QLabel(self.centralwidget)
+        self.logo_label.setGeometry(QtCore.QRect(680, 20, 91, 81))
+        self.logo_label.setText("")
+        self.logo_label.setPixmap(QtGui.QPixmap("../../images/Bank logo 1.png"))
+        self.logo_label.setObjectName("logo_label")
+        font5 = QFont()
+        font5.setPointSize(13)
+        font5.setBold(False)
+        font5.setWeight(75)
         self.tableWidget = QtWidgets.QTableWidget(self.centralwidget)
         self.tableWidget.setGeometry(QtCore.QRect(10, 130, 779, 441))
         self.tableWidget.setObjectName("tableWidget")
-        self.tableWidget.setColumnCount(2)
+        self.tableWidget.setColumnCount(3)
         self.tableWidget.setRowCount(0)
         item = QtWidgets.QTableWidgetItem()
         self.tableWidget.setHorizontalHeaderItem(0, item)
@@ -68,35 +67,46 @@ class Ui_Admin_View_Transaction(object):
         self.tableWidget.setStyleSheet(u"color: rgb(255, 255, 255);")
         item = QtWidgets.QTableWidgetItem()
         self.tableWidget.setHorizontalHeaderItem(1, item)
-        self.tableWidget.setColumnWidth(1, 500)
+        self.tableWidget.setColumnWidth(1, 259)
+        self.tableWidget.setFont(font5)
+        self.tableWidget.setStyleSheet(u"color: rgb(255, 255, 255);")
+        item = QtWidgets.QTableWidgetItem()
+        self.tableWidget.setHorizontalHeaderItem(2, item)
+        self.tableWidget.setColumnWidth(2, 259)
         self.tableWidget.setFont(font5)
         self.tableWidget.setStyleSheet(u"color: rgb(255, 255, 255);")
         row = 0
-        for items in get_admin_history("AdminHistory.txt"):
-            self.tableWidget.setRowCount(len(get_admin_history("AdminHistory.txt")))
+        for items in get_user_history(user_index):
+            self.tableWidget.setRowCount(len(get_user_history(user_index)))
             column = 0
+            if items[2][0] == "+":
+                operation = "+"
+            else:
+                operation = "-"
+            items[2] = f'{operation}'+'₱{:,.2f}'.format(int(items[2][1:]))
             for item in items:
                 self.tableWidget.setItem(row, column, QtWidgets.QTableWidgetItem(item))
                 column += 1
             row += 1
-        self.commandLinkButton = QCommandLinkButton(self.centralwidget, clicked=lambda: self.main_menu())
-        self.commandLinkButton.clicked.connect(lambda: Admin_View_Transaction.hide())
+        self.commandLinkButton = QCommandLinkButton(self.centralwidget, clicked=lambda: self.main_menu(user_index))
+        self.commandLinkButton.clicked.connect(lambda: User_View_Transaction.hide())
         self.commandLinkButton.setObjectName(u"commandLinkButton")
         self.commandLinkButton.setGeometry(QRect(0, 0, 41, 41))
         icon = QIcon()
-        icon.addFile(u"../images/back_button_icon.png", QSize(), QIcon.Normal, QIcon.Off)
+        icon.addFile(u"../../images/back_button_icon.png", QSize(), QIcon.Normal, QIcon.Off)
         self.commandLinkButton.setIcon(icon)
-        Admin_View_Transaction.setCentralWidget(self.centralwidget)
-        self.statusbar = QtWidgets.QStatusBar(Admin_View_Transaction)
+        User_View_Transaction.setCentralWidget(self.centralwidget)
+        self.statusbar = QtWidgets.QStatusBar(User_View_Transaction)
         self.statusbar.setObjectName("statusbar")
-        Admin_View_Transaction.setStatusBar(self.statusbar)
-        self.retranslateUi(Admin_View_Transaction)
-        QtCore.QMetaObject.connectSlotsByName(Admin_View_Transaction)
+        User_View_Transaction.setStatusBar(self.statusbar)
 
-    def retranslateUi(self, Admin_View_Transaction):
+        self.retranslateUi(User_View_Transaction)
+        QtCore.QMetaObject.connectSlotsByName(User_View_Transaction)
+
+    def retranslateUi(self, User_View_Transaction):
         _translate = QtCore.QCoreApplication.translate
-        Admin_View_Transaction.setWindowTitle(_translate("Admin_View_Transaction", "Admin Transactions"))
-        self.atm_label.setText(_translate("Admin_View_Transaction", "ATM"))
+        User_View_Transaction.setWindowTitle(_translate("User_View_Transaction", "User Transactions"))
+        self.atm_label.setText(_translate("User_View_Transaction", "ATM"))
         font = QFont()
         font.setPointSize(12)
         font.setBold(True)
@@ -107,14 +117,16 @@ class Ui_Admin_View_Transaction(object):
         item = self.tableWidget.horizontalHeaderItem(1)
         item.setFont(font)
         item.setText(_translate("User_View_Transaction", "Transactions"))
+        item = self.tableWidget.horizontalHeaderItem(2)
+        item.setFont(font)
+        item.setText(_translate("User_View_Transaction", "Balance"))
 
 
 if __name__ == "__main__":
     import sys
-
     app = QtWidgets.QApplication(sys.argv)
-    Admin_View_Transaction = QtWidgets.QMainWindow()
-    ui = Ui_Admin_View_Transaction()
-    ui.setupUi(Admin_View_Transaction)
-    Admin_View_Transaction.show()
+    User_View_Transaction = QtWidgets.QMainWindow()
+    ui = Ui_User_View_Transaction()
+    ui.setupUi(User_View_Transaction, 0)
+    User_View_Transaction.show()
     sys.exit(app.exec_())

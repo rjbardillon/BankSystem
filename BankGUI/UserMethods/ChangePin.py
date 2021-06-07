@@ -1,8 +1,8 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtCore import QRegExp
-from PyQt5.QtGui import QIntValidator, QRegExpValidator
+from PyQt5.QtGui import QRegExpValidator
 from PyQt5.QtWidgets import QMessageBox, QLineEdit, QPushButton
-from AccountCsv import get_account, edit_account
+from BankGUI.AccountCsv import get_account, edit_account
 
 
 class Ui_change_pin_window(object):
@@ -32,7 +32,7 @@ class Ui_change_pin_window(object):
         self.log_label = QtWidgets.QLabel(self.centralwidget)
         self.log_label.setGeometry(QtCore.QRect(690, 10, 101, 91))
         self.log_label.setText("")
-        self.log_label.setPixmap(QtGui.QPixmap("../images/Bank logo 1.png"))
+        self.log_label.setPixmap(QtGui.QPixmap("../../images/Bank logo 1.png"))
         self.log_label.setObjectName("log_label")
         self.input_pin = QtWidgets.QLineEdit(self.centralwidget)
         self.input_pin.setGeometry(QtCore.QRect(270, 140, 321, 81))

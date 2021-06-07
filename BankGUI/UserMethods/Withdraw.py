@@ -2,7 +2,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtCore import QRegExp
 from PyQt5.QtGui import QRegExpValidator
 from PyQt5.QtWidgets import QMessageBox, QPushButton
-from AccountCsv import get_account, edit_account, update_history
+from BankGUI.AccountCsv import get_account, edit_account, update_history
 
 
 class Ui_withdraw_window(object):
@@ -32,7 +32,7 @@ class Ui_withdraw_window(object):
         self.logo_label = QtWidgets.QLabel(self.centralwidget)
         self.logo_label.setGeometry(QtCore.QRect(690, 0, 101, 91))
         self.logo_label.setText("")
-        self.logo_label.setPixmap(QtGui.QPixmap("../images/Bank logo 1.png"))
+        self.logo_label.setPixmap(QtGui.QPixmap("../../images/Bank logo 1.png"))
         self.logo_label.setObjectName("logo_label")
         self.input_withdraw = QtWidgets.QLineEdit(self.centralwidget)
         self.input_withdraw.setGeometry(QtCore.QRect(370, 140, 321, 81))

@@ -2,7 +2,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtCore import QRegExp
 from PyQt5.QtGui import QRegExpValidator
 from PyQt5.QtWidgets import QPushButton, QMessageBox, QLineEdit
-from AccountCsv import get_account, edit_account, account_exists, update_history, admin_update_history
+from BankGUI.AccountCsv import get_account, edit_account, account_exists, update_history, admin_update_history
 
 
 class UiAddAccountWindow(object):
@@ -32,7 +32,7 @@ class UiAddAccountWindow(object):
         self.log_label = QtWidgets.QLabel(self.centralwidget)
         self.log_label.setGeometry(QtCore.QRect(690, 10, 101, 91))
         self.log_label.setText("")
-        self.log_label.setPixmap(QtGui.QPixmap("../images/Bank logo 1.png"))
+        self.log_label.setPixmap(QtGui.QPixmap("../../images/Bank logo 1.png"))
         self.log_label.setObjectName("log_label")
         self.username_input = QtWidgets.QLineEdit(self.centralwidget)
         self.username_input.setGeometry(QtCore.QRect(270, 140, 321, 81))
