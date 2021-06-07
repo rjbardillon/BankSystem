@@ -115,8 +115,14 @@ class Ui_change_pin_window(object):
     def enter_pressed(self, user_index, change_pin_window):
         input_pin = self.input_pin.text()
         confirm_pin = self.confirm_pin.text()
-        if len(input_pin) != 4 and len(confirm_pin) != 4:
+        if len(input_pin) == 0 and len(confirm_pin) == 0:
             self.error()
+            return False
+        elif len(confirm_pin) != 4:
+            self.confirm_pin_error()
+            return False
+        elif len(input_pin) != 4:
+            self.input_pin_error()
             return False
         elif input_pin == get_account()[user_index][1]:
             self.same_pin_error()
@@ -144,14 +150,28 @@ class Ui_change_pin_window(object):
     def same_pin_error(self):
         message = QMessageBox()
         message.setWindowTitle("Error")
-        message.setText("You already use this password! ")
+        message.setText("You already use this password ")
         message.setIcon(QMessageBox.Warning)
         message.exec_()
 
     def different_pin_error(self):
         message = QMessageBox()
         message.setWindowTitle("Error")
-        message.setText("Password not the same! ")
+        message.setText("Password not the same ")
+        message.setIcon(QMessageBox.Warning)
+        message.exec_()
+
+    def input_pin_error(self):
+        message = QMessageBox()
+        message.setWindowTitle("Error")
+        message.setText("Fill out the Input Pin ")
+        message.setIcon(QMessageBox.Warning)
+        message.exec_()
+
+    def confirm_pin_error(self):
+        message = QMessageBox()
+        message.setWindowTitle("Error")
+        message.setText("Fill out the Confirm Pin ")
         message.setIcon(QMessageBox.Warning)
         message.exec_()
 
