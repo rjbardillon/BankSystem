@@ -174,21 +174,21 @@ class UiAddAccountWindow(object):
     def empty_account_error(self):
         message = QMessageBox()
         message.setWindowTitle("Error")
-        message.setText(f"Null username is not allowed")
+        message.setText(f"Null username is not allowed.")
         message.setIcon(QMessageBox.Warning)
         message.exec_()
 
     def error(self):
         message = QMessageBox()
-        message.setWindowTitle("Error")
-        message.setText("Error!")
+        message.setWindowTitle("Try Again")
+        message.setText("Please fill out the form properly.")
         message.setIcon(QMessageBox.Warning)
         message.exec_()
 
     def balance_error(self):
         message = QMessageBox()
         message.setWindowTitle("Error")
-        message.setText("Initial Balance should not be less than 100!")
+        message.setText("Initial Balance should not be less than 100.")
         message.setIcon(QMessageBox.Warning)
         message.exec_()
 

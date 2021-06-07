@@ -109,7 +109,7 @@ class UiDeleteAccountWindow(object):
     def error(self):
         message = QMessageBox()
         message.setWindowTitle("Error")
-        message.setText("Username not existing!")
+        message.setText("Username not existing.")
         message.setIcon(QMessageBox.Warning)
         message.exec_()
 
