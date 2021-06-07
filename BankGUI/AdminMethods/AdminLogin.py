@@ -93,13 +93,15 @@ class UiLoginWindow(object):
         if "admin" == username_entry and "1234" == pin_entry:
             AdminLoginWindow.hide()
             self.admin_menu()
+        elif username_entry != "admin":
+            self.login_error()
         else:
             self.login_error()
 
     def login_error(self):
         message = QMessageBox()
-        message.setWindowTitle("Wrong Pin")
-        message.setText("Try again. ")
+        message.setWindowTitle("Try again")
+        message.setText("Username or Pin is incorrect.")
         message.setIcon(QMessageBox.Warning)
         message.exec_()
 

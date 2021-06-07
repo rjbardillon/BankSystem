@@ -103,18 +103,18 @@ class UiLoginWindow(object):
                 LoginWindow.hide()
                 self.main_menu(user_index)
             elif pin != pin_entry:
-                self.login_pin_error()
+                self.login_error()
 
-    def login_pin_error(self):
+    def login_error(self):
         message = QMessageBox()
         message.setWindowTitle("Try again")
-        message.setText("Wrong Pin! ")
+        message.setText("Username or Pin is incorrect")
         message.setIcon(QMessageBox.Warning)
         message.exec_()
 
     def no_user_existing_error(self):
         message = QMessageBox()
-        message.setWindowTitle("Error")
+        message.setWindowTitle("Try again")
         message.setText("No existing user. ")
         message.setIcon(QMessageBox.Warning)
         message.exec_()
