@@ -60,6 +60,7 @@ class Ui_Admin_View_Accounts(object):
         self.tableWidget.setDisabled(True)
         self.tableWidget.setStyleSheet(u"color: rgb(0, 0, 0);")
         self.tableWidget.setObjectName("tableWidget")
+        self.tableWidget.verticalHeader().setVisible(False)
         self.tableWidget.setColumnCount(3)
         self.tableWidget.setRowCount(0)
         item = QtWidgets.QTableWidgetItem()
