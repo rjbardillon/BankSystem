@@ -104,7 +104,7 @@ class UiAddAccountWindow(object):
         self.balance_input.setText("")
         self.balance_input.setObjectName("balance_input")
         self.balance_label = QtWidgets.QLabel(self.centralwidget)
-        self.balance_label.setGeometry(QtCore.QRect(10, 350, 251, 81))
+        self.balance_label.setGeometry(QtCore.QRect(25, 350, 240, 80))
         font = QtGui.QFont()
         font.setPointSize(18)
         font.setBold(True)
@@ -126,7 +126,7 @@ class UiAddAccountWindow(object):
         self.username_label.setText(_translate("add_account_window", "Username"))
         self.add_account_label.setText(_translate("add_account_window", "ADD ACCOUNT"))
         self.confirm_button.setText(_translate("add_account_window", "CONFIRM"))
-        self.pin_label.setText(_translate("add_account_window", "Pin"))
+        self.pin_label.setText(_translate("add_account_window", "Pin\n4 digit pin only"))
         self.cancel_button.setText(_translate("add_account_window", "CANCEL"))
         self.balance_label.setText(_translate("add_account_window", "Initial Balance\n(₱ 100 above)"))
 

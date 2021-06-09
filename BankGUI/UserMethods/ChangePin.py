@@ -106,10 +106,10 @@ class Ui_change_pin_window(object):
     def retranslateUi(self, change_pin_window):
         _translate = QtCore.QCoreApplication.translate
         change_pin_window.setWindowTitle(_translate("change_pin_window", "Change Pin"))
-        self.change_pin_label_2.setText(_translate("change_pin_window", "New Pin"))
+        self.change_pin_label_2.setText(_translate("change_pin_window", "New Pin\n4 digit pin only"))
         self.change_pin_label.setText(_translate("change_pin_window", "Change Pin"))
         self.confirm_button.setText(_translate("change_pin_window", "CONFIRM"))
-        self.change_pin_label_3.setText(_translate("change_pin_window", "Confirm Pin"))
+        self.change_pin_label_3.setText(_translate("change_pin_window", "Confirm Pin\n4 digit pin only"))
         self.cancel_button.setText(_translate("change_pin_window", "CANCEL"))
 
     def enter_pressed(self, user_index, change_pin_window):
@@ -178,7 +178,7 @@ class Ui_change_pin_window(object):
     def error(self):
         message = QMessageBox()
         message.setWindowTitle("Error")
-        message.setText("4 digit pin only! ")
+        message.setText("4 digit pin only ")
         message.setIcon(QMessageBox.Warning)
         message.exec_()
 
