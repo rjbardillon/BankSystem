@@ -1,16 +1,23 @@
 import csv
 import os
+import shutil
 from PyQt5.QtCore import QDateTime
 
 today = QDateTime.currentDateTime().toString('yyyy-MM-dd hh:mm:ss ap')
 admin_save_path = '../AdminHistoryFolder/'
 user_save_path = '../UserHistoryFolder/'
+user_deleted_save_path = '../UserHistoryFolder/DeletedUserFiles/'
 
 
 def create_file():
     file = admin_save_path + 'Accounts.txt'
     if not os.path.exists(file):
         open(file, mode='a')
+
+
+def move_file(username):
+    file = user_save_path + f'{username}.txt'
+    shutil.move(file, user_deleted_save_path)
 
 
 def get_account():
