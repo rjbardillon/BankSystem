@@ -1,0 +1,4 @@
+2021-06-10 01:07:46 pm,Added new account with the username 'user'
+2021-06-10 01:07:57 pm,Added new account with the username 'pepe'
+2021-06-10 01:08:07 pm,Deleted account with the username 'pepe'
+2021-06-10 01:08:32 pm,Deleted account with the username 'user'

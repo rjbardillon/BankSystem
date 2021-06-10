@@ -3,7 +3,6 @@ import os
 import shutil
 from PyQt5.QtCore import QDateTime
 
-today = QDateTime.currentDateTime().toString('yyyy-MM-dd hh:mm:ss ap')
 admin_save_path = '../AdminHistoryFolder/'
 user_save_path = '../UserHistoryFolder/'
 user_deleted_save_path = '../UserHistoryFolder/DeletedUserFiles/'
@@ -17,6 +16,8 @@ def create_file():
 
 def move_file(username):
     file = user_save_path + f'{username}.txt'
+    if not os.path.exists(user_deleted_save_path):
+        os.makedirs(user_deleted_save_path)
     shutil.move(file, user_deleted_save_path)
 
 
@@ -88,6 +89,7 @@ def delete_account(username):
 
 
 def update_history(username, transaction, balance):
+    today = QDateTime.currentDateTime().toString('yyyy-MM-dd hh:mm:ss ap')
     file = user_save_path + f'{username}.txt'
     if not os.path.exists(file):
         open(file, mode='a')
@@ -106,6 +108,7 @@ def update_history(username, transaction, balance):
 
 
 def admin_update_history(username, transaction):
+    today = QDateTime.currentDateTime().toString('yyyy-MM-dd hh:mm:ss ap')
     file = admin_save_path + 'AdminHistory.txt'
     record = ""
     if not os.path.exists(file):
