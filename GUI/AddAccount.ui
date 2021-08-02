@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>change_pin_window</class>
- <widget class="QMainWindow" name="change_pin_window">
+ <class>add_account_window</class>
+ <widget class="QMainWindow" name="add_account_window">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -20,8 +20,8 @@
    <widget class="QLabel" name="username_label">
     <property name="geometry">
      <rect>
-      <x>30</x>
-      <y>140</y>
+      <x>40</x>
+      <y>190</y>
       <width>201</width>
       <height>81</height>
      </rect>
@@ -59,8 +59,8 @@
    <widget class="QLineEdit" name="username_input">
     <property name="geometry">
      <rect>
-      <x>270</x>
-      <y>140</y>
+      <x>280</x>
+      <y>190</y>
       <width>321</width>
       <height>81</height>
      </rect>
@@ -78,7 +78,7 @@ selection-background-color: rgb(85, 170, 255);</string>
      <string/>
     </property>
    </widget>
-   <widget class="QLabel" name="change_pin_label">
+   <widget class="QLabel" name="add_account_label">
     <property name="geometry">
      <rect>
       <x>330</x>
@@ -105,7 +105,7 @@ selection-background-color: rgb(85, 170, 255);</string>
     <property name="geometry">
      <rect>
       <x>410</x>
-      <y>470</y>
+      <y>500</y>
       <width>171</width>
       <height>71</height>
      </rect>
@@ -128,8 +128,8 @@ color: rgb(255, 255, 255);</string>
    <widget class="QLineEdit" name="pin_input">
     <property name="geometry">
      <rect>
-      <x>270</x>
-      <y>250</y>
+      <x>280</x>
+      <y>300</y>
       <width>321</width>
       <height>81</height>
      </rect>
@@ -150,8 +150,8 @@ selection-background-color: rgb(85, 170, 255);</string>
    <widget class="QLabel" name="pin_label">
     <property name="geometry">
      <rect>
-      <x>30</x>
-      <y>250</y>
+      <x>40</x>
+      <y>300</y>
       <width>201</width>
       <height>81</height>
      </rect>
@@ -173,8 +173,8 @@ selection-background-color: rgb(85, 170, 255);</string>
    <widget class="QPushButton" name="cancel_button">
     <property name="geometry">
      <rect>
-      <x>70</x>
-      <y>470</y>
+      <x>60</x>
+      <y>500</y>
       <width>171</width>
       <height>71</height>
      </rect>
@@ -197,8 +197,8 @@ background-color: rgb(170, 0, 0);</string>
    <widget class="QLineEdit" name="balance_input">
     <property name="geometry">
      <rect>
-      <x>270</x>
-      <y>350</y>
+      <x>280</x>
+      <y>400</y>
       <width>321</width>
       <height>81</height>
      </rect>
@@ -219,8 +219,8 @@ selection-background-color: rgb(85, 170, 255);</string>
    <widget class="QLabel" name="balance_label">
     <property name="geometry">
      <rect>
-      <x>10</x>
-      <y>350</y>
+      <x>20</x>
+      <y>400</y>
       <width>251</width>
       <height>81</height>
      </rect>
@@ -238,6 +238,51 @@ selection-background-color: rgb(85, 170, 255);</string>
     <property name="text">
      <string>Initial Balance 
 (₱ 100 above)</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="name_input">
+    <property name="geometry">
+     <rect>
+      <x>280</x>
+      <y>90</y>
+      <width>321</width>
+      <height>81</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>20</pointsize>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: rgb(255, 255, 255);
+selection-background-color: rgb(85, 170, 255);</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QLabel" name="name_label">
+    <property name="geometry">
+     <rect>
+      <x>40</x>
+      <y>90</y>
+      <width>201</width>
+      <height>81</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>18</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: rgb(255, 255, 255);</string>
+    </property>
+    <property name="text">
+     <string>Name</string>
     </property>
    </widget>
   </widget>
