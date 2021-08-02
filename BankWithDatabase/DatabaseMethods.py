@@ -20,7 +20,7 @@ def add_account(username, name, pin, balance):
         return False
 
 
-def delete_account(username):
+def delete_account_in_database(username):
     my_cursor.execute(f"DELETE from customer WHERE username='{username}'")
     my_db.commit()
 
@@ -37,7 +37,7 @@ def withdraw(username, money_withdrawn):
     my_db.commit()
 
 
-def change_pin(username, new_pin):
+def change_pin_in_database(username, new_pin):
     my_cursor.execute(f"UPDATE customer SET pin = {new_pin} where username='{username}'")
     my_db.commit()
 

@@ -47,9 +47,8 @@ def edit_account(values):
 
 def account_exists(username):
     users = []
-    i = 0
     for user in get_account():
-        users.append(user[i])
+        users.append(user[1])
     if users.count(username):
         return True
     else:
@@ -60,7 +59,7 @@ def account_index(username):
     values = get_account()
     i = 0
     for value in values:
-        if value[0] == username:
+        if value[1] == username:
             return i
         else:
             i += 1
@@ -77,7 +76,7 @@ def delete_account(username):
             accounts.append(row)
         i = 0
         for account in accounts:
-            if account[0] == username:
+            if account[1] == username:
                 accounts.pop(i)
             else:
                 i += 1
@@ -140,7 +139,7 @@ def get_admin_history(file):
 
 
 def get_user_history(user_index):
-    file = user_save_path + f'{get_account()[user_index][0]}.txt'
+    file = user_save_path + f'{get_account()[user_index][1]}.txt'
     values = []
     if not os.path.exists(file):
         open(file, mode='a')
