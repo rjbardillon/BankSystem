@@ -53,18 +53,18 @@ class UiMainMenu(object):
         self.ui.setupUi(self.change_pin_window, user_index)
         self.change_pin_window.show()
 
-    def user_transactions_window(self, user_index):
+    def user_transactions_window(self, user_index, username):
         from UserViewTransactions import Ui_User_View_Transaction
         self.User_View_Transaction = QtWidgets.QMainWindow()
         self.ui = Ui_User_View_Transaction()
-        self.ui.setupUi(self.User_View_Transaction, user_index)
+        self.ui.setupUi(self.User_View_Transaction, user_index, username)
         self.User_View_Transaction.show()
 
     def showTime(self):
         current_time = QDateTime.currentDateTime().toString('hh:mm:ss ap\ndddd yyyy MMMM dd')
         self.clock_label.setText(current_time)
 
-    def setupUi(self, main_menu, user_index):
+    def setupUi(self, main_menu, user_index, username):
         main_menu.setObjectName("main_menu")
         main_menu.resize(800, 600)
         main_menu.setStyleSheet("background-color: rgb(85, 116, 255);\n"
@@ -176,7 +176,7 @@ class UiMainMenu(object):
         self.statusbar = QtWidgets.QStatusBar(main_menu)
         self.statusbar.setObjectName("statusbar")
         main_menu.setStatusBar(self.statusbar)
-        self.view_transactions_button = QPushButton(self.centralwidget, clicked=lambda: self.user_transactions_window(user_index))
+        self.view_transactions_button = QPushButton(self.centralwidget, clicked=lambda: self.user_transactions_window(user_index, username))
         self.view_transactions_button.clicked.connect(lambda: main_menu.hide())
         self.view_transactions_button.setObjectName(u"view_transactions_button")
         self.view_transactions_button.setGeometry(QRect(640, 150, 141, 21))

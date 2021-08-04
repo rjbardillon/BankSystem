@@ -2,7 +2,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtCore import QRegExp
 from PyQt5.QtGui import QRegExpValidator
 from PyQt5.QtWidgets import QMessageBox, QPushButton
-from BankGUI.AccountCsv import get_account, edit_account, update_history
+from BankGUI.AccountCsv import get_account, edit_account, user_update_history
 from BankWithDatabase.DatabaseMethods import withdraw
 
 
@@ -99,7 +99,7 @@ class Ui_withdraw_window(object):
                 withdraw(elements[user_index][1], money_withdraw)
                 self.withdraw_success(user_index)
                 withdraw_window.hide()
-                update_history(elements[user_index][1], "Withdraw", s_money_withdraw)
+                user_update_history(elements[user_index][1], "Withdraw", s_money_withdraw)
                 self.main_menu(user_index)
 
     def withdraw_success(self, user_index):

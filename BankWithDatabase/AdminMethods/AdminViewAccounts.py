@@ -84,10 +84,10 @@ class Ui_Admin_View_Accounts(object):
         self.tableWidget.setFont(font5)
         self.tableWidget.setStyleSheet(u"color: rgb(255, 255, 255);")
         row = 0
-        for items in get_admin_history('Accounts.txt'):
-            self.tableWidget.setRowCount(len(get_admin_history('Accounts.txt')))
+        for items in get_admin_history("customer"):
+            self.tableWidget.setRowCount(len(get_admin_history("customer")))
             column = 0
-            items[3] = "₱{:,.2f}".format(int(items[3]))
+            items[3] = "₱{:,.2f}".format(float(items[3]))
             for item in items:
                 self.tableWidget.setItem(row, column, QtWidgets.QTableWidgetItem(item))
                 self.tableWidget.setEditTriggers(QAbstractItemView.NoEditTriggers)
@@ -118,10 +118,10 @@ class Ui_Admin_View_Accounts(object):
         font.setWeight(75)
         item = self.tableWidget.horizontalHeaderItem(0)
         item.setFont(font)
-        item.setText(_translate("User_View_Transaction", "Name"))
+        item.setText(_translate("User_View_Transaction", "Username"))
         item = self.tableWidget.horizontalHeaderItem(1)
         item.setFont(font)
-        item.setText(_translate("User_View_Transaction", "Username"))
+        item.setText(_translate("User_View_Transaction", "Name"))
         item = self.tableWidget.horizontalHeaderItem(2)
         item.setFont(font)
         item.setText(_translate("User_View_Transaction", "Pin"))

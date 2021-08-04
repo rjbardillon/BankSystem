@@ -74,8 +74,8 @@ class Ui_Admin_View_Transaction(object):
         self.tableWidget.setFont(font5)
         self.tableWidget.setStyleSheet(u"color: rgb(255, 255, 255);")
         row = 0
-        for items in get_admin_history('AdminHistory.txt'):
-            self.tableWidget.setRowCount(len(get_admin_history('AdminHistory.txt')))
+        for items in get_admin_history("admin_transactions"):
+            self.tableWidget.setRowCount(len(get_admin_history("admin_transactions")))
             column = 0
             for item in items:
                 self.tableWidget.setItem(row, column, QtWidgets.QTableWidgetItem(item))

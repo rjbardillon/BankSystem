@@ -42,9 +42,27 @@ def change_pin_in_database(username, new_pin):
     my_db.commit()
 
 
-# print(add_account('romsky1.bardillon', 'Romeo Jr M Bardillon', 1234, 10000))
-# delete_account("jj.gmail")
-# deposit("romsky.bardillon", 10000)
-# withdraw("romsky.bardillon", 10000)
-# change_pin("romsky.bardillon", 4321)
-# print(get_item("romsky.bardillon", "name"))
+def update_customer_history(username, today, transaction, balance):
+    my_cursor.execute(f"INSERT into customer_transactions values('{username}', '{today}', '{transaction}', '{balance}')")
+    my_db.commit()
+
+
+def update_admin_history(today, transaction):
+    my_cursor.execute(f'INSERT into admin_transactions values("{today}", "{transaction}")')
+    my_db.commit()
+
+
+def get_admin_transactions_in_database(table):
+    values = []
+    my_cursor.execute(f"SELECT * from {table}")
+    for i in my_cursor:
+        values.append(i)
+    return values
+
+
+def get_customer_transactions_in_database(username):
+    values = []
+    my_cursor.execute(f"SELECT date, transaction, balance from customer_transactions where username='{username}'")
+    for i in my_cursor:
+        values.append(i)
+    return values

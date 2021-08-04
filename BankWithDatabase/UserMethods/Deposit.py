@@ -2,7 +2,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtCore import QRegExp
 from PyQt5.QtWidgets import QMessageBox, QPushButton
 from PyQt5.QtGui import QRegExpValidator
-from BankGUI.AccountCsv import get_account, edit_account, update_history
+from BankGUI.AccountCsv import get_account, edit_account, user_update_history
 from BankWithDatabase.DatabaseMethods import deposit
 
 
@@ -98,7 +98,7 @@ class Ui_deposit_window(object):
                 self.deposit_success(user_index)
                 print(elements[user_index][1])
                 deposit_window.hide()
-                update_history(elements[user_index][1], "Deposit", s_money_deposited)
+                user_update_history(elements[user_index][1], "Deposit", s_money_deposited)
                 self.main_menu(user_index)
 
     def deposit_success(self, user_index):
@@ -108,7 +108,6 @@ class Ui_deposit_window(object):
         message.setText(f"Your new balance is {'₱{:,.2f}'.format(int(balance))}")
         message.setIcon(QMessageBox.Information)
         message.exec_()
-
 
     def error(self):
         message = QMessageBox()

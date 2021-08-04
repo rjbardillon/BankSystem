@@ -18,7 +18,7 @@ class Ui_User_View_Transaction(object):
         current_time = QDateTime.currentDateTime().toString('hh:mm:ss ap\ndddd yyyy MMMM dd')
         self.clock_label.setText(current_time)
 
-    def setupUi(self, User_View_Transaction, user_index):
+    def setupUi(self, User_View_Transaction, user_index, username):
         User_View_Transaction.setObjectName("User_View_Transaction")
         User_View_Transaction.resize(800, 600)
         User_View_Transaction.setStyleSheet("background-color: rgb(85, 116, 255);\n"
@@ -79,8 +79,8 @@ class Ui_User_View_Transaction(object):
         self.tableWidget.setFont(font5)
         self.tableWidget.setStyleSheet(u"color: rgb(255, 255, 255);")
         row = 0
-        for items in get_user_history(user_index):
-            self.tableWidget.setRowCount(len(get_user_history(user_index)))
+        for items in get_user_history(username):
+            self.tableWidget.setRowCount(len(get_user_history(username)))
             column = 0
             if items[2][0] == "+":
                 operation = "+"
@@ -132,6 +132,6 @@ if __name__ == "__main__":
     app = QtWidgets.QApplication(sys.argv)
     User_View_Transaction = QtWidgets.QMainWindow()
     ui = Ui_User_View_Transaction()
-    ui.setupUi(User_View_Transaction, 0)
+    ui.setupUi(User_View_Transaction, 0, "user")
     User_View_Transaction.show()
     sys.exit(app.exec_())

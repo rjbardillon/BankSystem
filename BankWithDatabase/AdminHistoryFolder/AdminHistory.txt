@@ -1,3 +1,0 @@
-2021-08-02 03:22:34 pm,Added new account with the username 'user'
-2021-08-02 03:22:46 pm,Added new account with the username 'fake'
-2021-08-02 03:22:50 pm,Deleted account with the username 'fake'

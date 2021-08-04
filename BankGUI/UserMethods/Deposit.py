@@ -2,7 +2,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtCore import QRegExp
 from PyQt5.QtWidgets import QMessageBox, QPushButton
 from PyQt5.QtGui import QRegExpValidator
-from BankGUI.AccountCsv import get_account, edit_account, update_history
+from BankGUI.AccountCsv import get_account, edit_account, user_update_history
 
 
 class Ui_deposit_window(object):
@@ -95,7 +95,7 @@ class Ui_deposit_window(object):
                 edit_account(elements)
                 self.deposit_success(user_index)
                 deposit_window.hide()
-                update_history(elements[user_index][0], "Deposit", s_money_deposited)
+                user_update_history(elements[user_index][0], "Deposit", s_money_deposited)
                 self.main_menu(user_index)
 
     def deposit_success(self, user_index):

@@ -7,11 +7,11 @@ from PyQt5.QtWidgets import QMessageBox, QLineEdit, QPushButton
 
 class UiLoginWindow(object):
 
-    def main_menu(self, user_index):
+    def main_menu(self, user_index, username):
         from MainMenu import UiMainMenu
         self.main_menu = QtWidgets.QMainWindow()
         self.ui = UiMainMenu()
-        self.ui.setupUi(self.main_menu, user_index)
+        self.ui.setupUi(self.main_menu, user_index, username)
         self.main_menu.show()
 
     def setupUi(self, MainWindow):
@@ -101,7 +101,7 @@ class UiLoginWindow(object):
             pin = elements[user_index][2]
             if username == username_entry and pin == pin_entry:
                 LoginWindow.hide()
-                self.main_menu(user_index)
+                self.main_menu(user_index, username_entry)
             elif pin != pin_entry:
                 self.login_error()
 

@@ -2,7 +2,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtCore import QRegExp
 from PyQt5.QtGui import QRegExpValidator
 from PyQt5.QtWidgets import QPushButton, QMessageBox, QLineEdit
-from BankGUI.AccountCsv import get_account, edit_account, account_exists, update_history, admin_update_history
+from BankGUI.AccountCsv import get_account, edit_account, account_exists, user_update_history, admin_update_history
 from BankWithDatabase.DatabaseMethods import add_account
 
 class UiAddAccountWindow(object):
@@ -172,7 +172,7 @@ class UiAddAccountWindow(object):
                 existing_users = get_account()
                 existing_users.append(new_user)
                 edit_account(existing_users)
-                update_history(username_entry, "Create Account", self.balance_input.text())
+                user_update_history(username_entry, "Create Account", self.balance_input.text())
                 admin_update_history(username_entry, "Add Account")
                 add_account(username_entry, name_entry, pin_entry, int(self.balance_input.text()))
                 self.add_account_success()
