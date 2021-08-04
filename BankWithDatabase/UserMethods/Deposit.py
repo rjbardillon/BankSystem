@@ -8,14 +8,14 @@ from BankWithDatabase.DatabaseMethods import deposit
 
 class Ui_deposit_window(object):
 
-    def main_menu(self, user_index):
+    def main_menu(self, user_index, username):
         from MainMenu import UiMainMenu
         self.main_menu = QtWidgets.QMainWindow()
         self.ui = UiMainMenu()
-        self.ui.setupUi(self.main_menu, user_index)
+        self.ui.setupUi(self.main_menu, user_index, username)
         self.main_menu.show()
 
-    def setupUi(self, deposit_window, user_index):
+    def setupUi(self, deposit_window, user_index, username):
         deposit_window.setObjectName("deposit_window")
         deposit_window.resize(800, 600)
         deposit_window.setStyleSheet("background-color: rgb(0, 0, 127);")
@@ -44,7 +44,7 @@ class Ui_deposit_window(object):
         self.input_deposit.setStyleSheet("color: rgb(255, 255, 255);\n"
                                          "selection-background-color: rgb(85, 170, 255);")
         self.input_deposit.setObjectName("input_deposit")
-        self.enter_button = QPushButton(self.centralwidget, clicked=lambda: self.enter_pressed(user_index, deposit_window))
+        self.enter_button = QPushButton(self.centralwidget, clicked=lambda: self.enter_pressed(user_index, deposit_window, username))
         self.enter_button.setGeometry(QtCore.QRect(450, 250, 161, 61))
         font = QtGui.QFont()
         font.setPointSize(16)
@@ -54,7 +54,7 @@ class Ui_deposit_window(object):
         self.enter_button.setStyleSheet("color: rgb(255, 255, 255);\n"
                                         "background-color: rgb(85, 170, 255);")
         self.enter_button.setObjectName("enter_button")
-        self.cancel_button = QPushButton(self.centralwidget, clicked=lambda: self.main_menu(user_index))
+        self.cancel_button = QPushButton(self.centralwidget, clicked=lambda: self.main_menu(user_index, username))
         self.cancel_button.setGeometry(QtCore.QRect(170, 260, 161, 61))
         font = QtGui.QFont()
         font.setPointSize(16)
@@ -80,7 +80,7 @@ class Ui_deposit_window(object):
         self.enter_button.setText(_translate("deposit_window", "ENTER"))
         self.cancel_button.setText(_translate("deposit_window", "CANCEL"))
 
-    def enter_pressed(self, user_index, deposit_window):
+    def enter_pressed(self, user_index, deposit_window, username):
         s_money_deposited = self.input_deposit.text()
         elements = get_account()
         balance = int(elements[user_index][3])
@@ -99,7 +99,7 @@ class Ui_deposit_window(object):
                 print(elements[user_index][1])
                 deposit_window.hide()
                 user_update_history(elements[user_index][1], "Deposit", s_money_deposited)
-                self.main_menu(user_index)
+                self.main_menu(user_index, username)
 
     def deposit_success(self, user_index):
         balance = get_account()[user_index][3]
@@ -123,6 +123,6 @@ if __name__ == "__main__":
     app = QtWidgets.QApplication(sys.argv)
     deposit_window = QtWidgets.QMainWindow()
     ui = Ui_deposit_window()
-    ui.setupUi(deposit_window, 0)
+    ui.setupUi(deposit_window, 0, "user")
     deposit_window.show()
     sys.exit(app.exec_())

@@ -3,15 +3,16 @@ from PyQt5.QtCore import QRect, QSize, QDateTime, QTimer
 from PyQt5.QtGui import QIcon, QFont
 from PyQt5.QtWidgets import QCommandLinkButton, QLabel, QAbstractItemView
 from BankGUI.AccountCsv import get_user_history
+from BankWithDatabase.DatabaseMethods import get_customer_transactions_in_database
 
 
 class Ui_User_View_Transaction(object):
 
-    def main_menu(self, user_index):
+    def main_menu(self, user_index, username):
         from MainMenu import UiMainMenu
         self.main_menu = QtWidgets.QMainWindow()
         self.ui = UiMainMenu()
-        self.ui.setupUi(self.main_menu, user_index)
+        self.ui.setupUi(self.main_menu, user_index, username)
         self.main_menu.show()
 
     def showTime(self):
@@ -79,20 +80,19 @@ class Ui_User_View_Transaction(object):
         self.tableWidget.setFont(font5)
         self.tableWidget.setStyleSheet(u"color: rgb(255, 255, 255);")
         row = 0
-        for items in get_user_history(username):
-            self.tableWidget.setRowCount(len(get_user_history(username)))
+        for items in get_customer_transactions_in_database(username):
+            self.tableWidget.setRowCount(len(get_customer_transactions_in_database(username)))
             column = 0
             if items[2][0] == "+":
-                operation = "+"
+                items[2] = "+" + '₱{:,.2f}'.format(float(items[2][1:]))
             else:
-                operation = "-"
-            items[2] = f'{operation}' + '₱{:,.2f}'.format(int(items[2][1:]))
+                items[2] = "-" + '₱{:,.2f}'.format(float(items[2][1:]))
             for item in items:
                 self.tableWidget.setItem(row, column, QtWidgets.QTableWidgetItem(item))
                 self.tableWidget.setEditTriggers(QAbstractItemView.NoEditTriggers)
                 column += 1
             row += 1
-        self.commandLinkButton = QCommandLinkButton(self.centralwidget, clicked=lambda: self.main_menu(user_index))
+        self.commandLinkButton = QCommandLinkButton(self.centralwidget, clicked=lambda: self.main_menu(user_index, username))
         self.commandLinkButton.clicked.connect(lambda: User_View_Transaction.hide())
         self.commandLinkButton.setObjectName(u"commandLinkButton")
         self.commandLinkButton.setGeometry(QRect(0, 0, 41, 41))

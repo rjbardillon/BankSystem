@@ -8,14 +8,14 @@ from BankWithDatabase.DatabaseMethods import withdraw
 
 class Ui_withdraw_window(object):
 
-    def main_menu(self, user_index):
+    def main_menu(self, user_index, username):
         from MainMenu import UiMainMenu
         self.main_menu = QtWidgets.QMainWindow()
         self.ui = UiMainMenu()
-        self.ui.setupUi(self.main_menu, user_index)
+        self.ui.setupUi(self.main_menu, user_index, username)
         self.main_menu.show()
 
-    def setupUi(self, withdraw_window, user_index):
+    def setupUi(self, withdraw_window, user_index, username):
         withdraw_window.setObjectName("withdraw_window")
         withdraw_window.resize(800, 600)
         withdraw_window.setStyleSheet("background-color: rgb(0, 0, 127);")
@@ -44,7 +44,7 @@ class Ui_withdraw_window(object):
                                          "selection-background-color: rgb(85, 170, 255);")
         self.input_withdraw.setObjectName("input_deposit")
         self.input_withdraw.setValidator(QRegExpValidator(QRegExp("[0-9]{6}")))
-        self.enter_button = QPushButton(self.centralwidget, clicked=lambda: self.enter_pressed(user_index, withdraw_window))
+        self.enter_button = QPushButton(self.centralwidget, clicked=lambda: self.enter_pressed(user_index, withdraw_window, username))
         self.enter_button.setGeometry(QtCore.QRect(530, 260, 161, 61))
         font = QtGui.QFont()
         font.setPointSize(16)
@@ -54,7 +54,7 @@ class Ui_withdraw_window(object):
         self.enter_button.setStyleSheet("color: rgb(255, 255, 255);\n"
                                         "background-color: rgb(85, 170, 255);")
         self.enter_button.setObjectName("enter_button")
-        self.cancel_button = QPushButton(self.centralwidget, clicked=lambda: self.main_menu(user_index))
+        self.cancel_button = QPushButton(self.centralwidget, clicked=lambda: self.main_menu(user_index, username))
         self.cancel_button.setGeometry(QtCore.QRect(200, 260, 161, 61))
         font = QtGui.QFont()
         font.setPointSize(16)
@@ -80,7 +80,7 @@ class Ui_withdraw_window(object):
         self.enter_button.setText(_translate("withdraw_window", "ENTER"))
         self.cancel_button.setText(_translate("withdraw_window", "CANCEL"))
 
-    def enter_pressed(self, user_index, withdraw_window):
+    def enter_pressed(self, user_index, withdraw_window, username):
         s_money_withdraw = self.input_withdraw.text()
         elements = get_account()
         balance = int(elements[user_index][3])
@@ -100,7 +100,7 @@ class Ui_withdraw_window(object):
                 self.withdraw_success(user_index)
                 withdraw_window.hide()
                 user_update_history(elements[user_index][1], "Withdraw", s_money_withdraw)
-                self.main_menu(user_index)
+                self.main_menu(user_index, username)
 
     def withdraw_success(self, user_index):
         balance = get_account()[user_index][3]
@@ -133,6 +133,6 @@ if __name__ == "__main__":
     app = QtWidgets.QApplication(sys.argv)
     withdraw_window = QtWidgets.QMainWindow()
     ui = Ui_withdraw_window()
-    ui.setupUi(withdraw_window, 0)
+    ui.setupUi(withdraw_window, 0, "user")
     withdraw_window.show()
     sys.exit(app.exec_())

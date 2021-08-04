@@ -3,6 +3,7 @@ from PyQt5.QtCore import QRect, QSize, QDateTime, QTimer
 from PyQt5.QtGui import QIcon, QFont
 from PyQt5.QtWidgets import QCommandLinkButton, QLabel, QAbstractItemView
 from BankGUI.AccountCsv import get_admin_history
+from BankWithDatabase.DatabaseMethods import get_admin_transactions_in_database
 
 
 class Ui_Admin_View_Accounts(object):
@@ -84,9 +85,10 @@ class Ui_Admin_View_Accounts(object):
         self.tableWidget.setFont(font5)
         self.tableWidget.setStyleSheet(u"color: rgb(255, 255, 255);")
         row = 0
-        for items in get_admin_history("customer"):
-            self.tableWidget.setRowCount(len(get_admin_history("customer")))
+        for items in get_admin_transactions_in_database("customer"):
+            self.tableWidget.setRowCount(len(get_admin_transactions_in_database("customer")))
             column = 0
+            items[2] = str(items[2])
             items[3] = "₱{:,.2f}".format(float(items[3]))
             for item in items:
                 self.tableWidget.setItem(row, column, QtWidgets.QTableWidgetItem(item))

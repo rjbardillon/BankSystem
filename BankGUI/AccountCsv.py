@@ -17,9 +17,14 @@ def create_file():
 
 def move_file(username):
     file = user_save_path + f'{username}.txt'
+    file2 = user_save_path + f'{username}1.txt'
     if not os.path.exists(user_deleted_save_path):
         os.makedirs(user_deleted_save_path)
-    shutil.move(file, user_deleted_save_path)
+    if os.path.exists(user_deleted_save_path + f'{username}.txt'):
+        os.rename(file, file2)
+        shutil.move(file2, user_deleted_save_path)
+    else:
+        shutil.move(file, user_deleted_save_path)
 
 
 def get_account():
@@ -126,20 +131,20 @@ def admin_update_history(username, transaction):
 
 
 def get_admin_history(table):
-    users=[]
+    users = []
     values = []
     for items in get_admin_transactions_in_database(table):
         for item in items:
             values.append(str(item))
-        users.append(values)
+    users.append(values)
     return users
 
-
+# print(get_admin_history("customer"))
 def get_user_history(username):
     users = []
     values = []
     for items in get_customer_transactions_in_database(username):
         for item in items:
             values.append(str(item))
-        users.append(values)
+    users.append(values)
     return users

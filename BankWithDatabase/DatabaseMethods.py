@@ -11,6 +11,24 @@ def get_item(username, item):
         return i[0]
 
 
+def account_is_existing(username):
+    my_cursor.execute(f"SELECT EXISTS (SELECT * from customer where username='{username}')")
+    for i in my_cursor:
+        if int(i[0]) == 1:
+            return True
+        else:
+            return False
+
+
+def is_correct(username, password):
+    my_cursor.execute(f"SELECT {password} from customer where username='{username}'")
+    for i in my_cursor:
+        if i[0] == password:
+            return True
+        else:
+            return False
+
+
 def add_account(username, name, pin, balance):
     try:
         my_cursor.execute(f"INSERT into customer values('{username}','{name}', {pin}, {balance})")
@@ -22,6 +40,11 @@ def add_account(username, name, pin, balance):
 
 def delete_account_in_database(username):
     my_cursor.execute(f"DELETE from customer WHERE username='{username}'")
+    my_db.commit()
+
+
+def delete_account_transactions(username):
+    my_cursor.execute(f"DELETE from customer_transactions WHERE username='{username}'")
     my_db.commit()
 
 
@@ -56,7 +79,7 @@ def get_admin_transactions_in_database(table):
     values = []
     my_cursor.execute(f"SELECT * from {table}")
     for i in my_cursor:
-        values.append(i)
+        values.append(list(i))
     return values
 
 
@@ -64,5 +87,5 @@ def get_customer_transactions_in_database(username):
     values = []
     my_cursor.execute(f"SELECT date, transaction, balance from customer_transactions where username='{username}'")
     for i in my_cursor:
-        values.append(i)
+        values.append(list(i))
     return values

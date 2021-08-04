@@ -1,7 +1,7 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import QPushButton, QMessageBox
 from BankGUI.AccountCsv import account_exists, delete_account, user_update_history, admin_update_history, move_file
-from BankWithDatabase.DatabaseMethods import delete_account_in_database
+from BankWithDatabase.DatabaseMethods import delete_account_in_database, delete_account_transactions
 
 class UiDeleteAccountWindow(object):
 
@@ -98,6 +98,7 @@ class UiDeleteAccountWindow(object):
             delete_account_window.hide()
             user_update_history(username, "Delete Account", "0")
             admin_update_history(username, "Delete Account")
+            delete_account_transactions(username)
             move_file(username)
 
     def account_deleted_successfully(self):

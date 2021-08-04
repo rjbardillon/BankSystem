@@ -27,16 +27,16 @@ class UiMainMenu(object):
         main_menu.hide()
         self.LoginWindow.show()
 
-    def deposit_window(self, user_index):
+    def deposit_window(self, user_index, username):
         self.deposit_window = QtWidgets.QMainWindow()
         self.ui = Ui_deposit_window()
-        self.ui.setupUi(self.deposit_window, user_index)
+        self.ui.setupUi(self.deposit_window, user_index, username)
         self.deposit_window.show()
 
-    def withdraw_window(self, user_index):
+    def withdraw_window(self, user_index, username):
         self.withdraw_window = QtWidgets.QMainWindow()
         self.ui = Ui_withdraw_window()
-        self.ui.setupUi(self.withdraw_window, user_index)
+        self.ui.setupUi(self.withdraw_window, user_index, username)
         self.withdraw_window.show()
 
     def show_balance(self, user_index):
@@ -47,10 +47,10 @@ class UiMainMenu(object):
         message.setIcon(QMessageBox.Information)
         message.exec_()
 
-    def change_pin_window(self, user_index):
+    def change_pin_window(self, user_index, username):
         self.change_pin_window = QtWidgets.QMainWindow()
         self.ui = Ui_change_pin_window()
-        self.ui.setupUi(self.change_pin_window, user_index)
+        self.ui.setupUi(self.change_pin_window, user_index, username)
         self.change_pin_window.show()
 
     def user_transactions_window(self, user_index, username):
@@ -112,7 +112,7 @@ class UiMainMenu(object):
         self.name_label.setStyleSheet("color: rgb(255, 255, 255);")
         self.name_label.setObjectName("name_label")
         self.name_label.setText(get_account()[user_index][0])
-        self.withdraw_button = QPushButton(self.centralwidget, clicked=lambda: self.withdraw_window(user_index))
+        self.withdraw_button = QPushButton(self.centralwidget, clicked=lambda: self.withdraw_window(user_index, username))
         self.withdraw_button.setGeometry(QtCore.QRect(530, 180, 251, 81))
         font = QtGui.QFont()
         font.setPointSize(22)
@@ -123,7 +123,7 @@ class UiMainMenu(object):
                                            "background-color: rgb(85, 170, 255);")
         self.withdraw_button.setObjectName("withdraw_button")
         self.withdraw_button.clicked.connect(lambda: main_menu.hide())
-        self.deposit_button = QPushButton(self.centralwidget, clicked=lambda: self.deposit_window(user_index))
+        self.deposit_button = QPushButton(self.centralwidget, clicked=lambda: self.deposit_window(user_index, username))
         self.deposit_button.setGeometry(QtCore.QRect(260, 180, 251, 81))
         font = QtGui.QFont()
         font.setPointSize(22)
@@ -134,7 +134,7 @@ class UiMainMenu(object):
                                           "color: rgb(255, 255, 255);")
         self.deposit_button.setObjectName("deposit_button")
         self.deposit_button.clicked.connect(lambda: main_menu.hide())
-        self.changepin_button = QPushButton(self.centralwidget, clicked=lambda: self.change_pin_window(user_index))
+        self.changepin_button = QPushButton(self.centralwidget, clicked=lambda: self.change_pin_window(user_index, username))
         self.changepin_button.setGeometry(QtCore.QRect(530, 300, 251, 81))
         font = QtGui.QFont()
         font.setPointSize(22)
@@ -209,6 +209,6 @@ if __name__ == "__main__":
     app = QtWidgets.QApplication(sys.argv)
     main_menu = QtWidgets.QMainWindow()
     ui = UiMainMenu()
-    ui.setupUi(main_menu, 0)
+    ui.setupUi(main_menu, 0, "user")
     main_menu.show()
     sys.exit(app.exec_())

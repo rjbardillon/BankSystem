@@ -1,9 +1,9 @@
 import os
 from PyQt5.QtGui import QIntValidator
-from BankGUI.AccountCsv import get_account, account_index, create_file
+from BankGUI.AccountCsv import account_index, create_file
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import QMessageBox, QLineEdit, QPushButton
-
+from BankWithDatabase.DatabaseMethods import account_is_existing, is_correct
 
 class UiLoginWindow(object):
 
@@ -89,20 +89,33 @@ class UiLoginWindow(object):
         self.password_label.setText(_translate("MainWindow", "Password"))
         self.login_button.setText(_translate("MainWindow", "Login"))
 
+    # def login_pressed(self, LoginWindow):
+    #     username_entry = self.username_input.text()
+    #     pin_entry = self.password_input.text()
+    #     user_index = account_index(username_entry)
+    #     if user_index == None:
+    #         self.no_user_existing_error()
+    #     else:
+    #         elements = get_account()
+    #         username = elements[user_index][1]
+    #         pin = elements[user_index][2]
+    #         if username == username_entry and pin == pin_entry:
+    #             LoginWindow.hide()
+    #             self.main_menu(user_index, username_entry)
+    #         elif pin != pin_entry:
+    #             self.login_error()
+
     def login_pressed(self, LoginWindow):
         username_entry = self.username_input.text()
         pin_entry = self.password_input.text()
         user_index = account_index(username_entry)
-        if user_index == None:
+        if not account_is_existing(username_entry):
             self.no_user_existing_error()
         else:
-            elements = get_account()
-            username = elements[user_index][1]
-            pin = elements[user_index][2]
-            if username == username_entry and pin == pin_entry:
+            if is_correct(username_entry, int(pin_entry)):
                 LoginWindow.hide()
                 self.main_menu(user_index, username_entry)
-            elif pin != pin_entry:
+            else:
                 self.login_error()
 
     def login_error(self):
