@@ -20,10 +20,10 @@ def account_is_existing(username):
             return False
 
 
-def is_correct(username, password):
-    my_cursor.execute(f"SELECT {password} from customer where username='{username}'")
+def is_correct(username, pin):
+    my_cursor.execute(f"SELECT pin from customer where username='{username}'")
     for i in my_cursor:
-        if i[0] == password:
+        if i[0] == pin:
             return True
         else:
             return False

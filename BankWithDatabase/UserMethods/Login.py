@@ -95,6 +95,8 @@ class UiLoginWindow(object):
         user_index = account_index(username_entry)
         if not account_is_existing(username_entry):
             self.no_user_existing_error()
+        elif len(pin_entry) < 4:
+            self.login_error()
         else:
             if is_correct(username_entry, int(pin_entry)):
                 LoginWindow.hide()
