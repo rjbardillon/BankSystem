@@ -2,7 +2,6 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtCore import QRect, QSize, QDateTime, QTimer
 from PyQt5.QtGui import QIcon, QFont
 from PyQt5.QtWidgets import QCommandLinkButton, QLabel, QAbstractItemView
-from BankGUI.AccountCsv import get_admin_history
 from BankWithDatabase.DatabaseMethods import get_admin_transactions_in_database
 
 

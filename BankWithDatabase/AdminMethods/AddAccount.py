@@ -3,7 +3,7 @@ from PyQt5.QtCore import QRegExp
 from PyQt5.QtGui import QRegExpValidator
 from PyQt5.QtWidgets import QPushButton, QMessageBox, QLineEdit
 from BankGUI.AccountCsv import get_account, edit_account, account_exists, user_update_history, admin_update_history
-from BankWithDatabase.DatabaseMethods import add_account
+from BankWithDatabase.DatabaseMethods import add_account, account_is_existing
 
 class UiAddAccountWindow(object):
 
@@ -152,7 +152,7 @@ class UiAddAccountWindow(object):
     def enter_pressed_button(self, add_account_window):
         new_user = []
         username_entry = self.username_input.text()
-        if account_exists(username_entry):
+        if account_is_existing(username_entry):
             self.duplicate_account_error()
         elif len(username_entry) == 0 or len(self.balance_input.text()) == 0 or len(self.pin_input.text()) == 0:
             self.error()

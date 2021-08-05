@@ -1,7 +1,7 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import QPushButton, QMessageBox
 from BankGUI.AccountCsv import account_exists, delete_account, user_update_history, admin_update_history, move_file
-from BankWithDatabase.DatabaseMethods import delete_account_in_database, delete_account_transactions
+from BankWithDatabase.DatabaseMethods import delete_account_in_database, delete_account_transactions, account_is_existing
 
 class UiDeleteAccountWindow(object):
 
@@ -89,7 +89,7 @@ class UiDeleteAccountWindow(object):
 
     def enter_pressed_button(self, delete_account_window):
         username = self.username_input.text()
-        if not account_exists(username):
+        if not account_is_existing(username):
             self.error()
         else:
             delete_account(username)
